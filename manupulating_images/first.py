@@ -1,7 +1,9 @@
 from PIL import Image
-from pprint import pprint # for nicely displaying the output
+from typing import List, Tuple
+from pprint import pprint  # for nicely displaying the output
 
-def get_rows(pixels: list, width: int) -> list:
+
+def get_rows(pixels: List[Tuple], width: int) -> List[List[Tuple]]:
     return [pixels[x : x + width] for x in range(0, len(pixels), width)]
 
 
@@ -19,7 +21,7 @@ def main():
 
     # get the pixels
 
-    pixels = list(resized_image.getdata())
+    pixels: List[Tuple] = list(resized_image.getdata())
 
     # print(pixels)
 
