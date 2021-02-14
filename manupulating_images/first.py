@@ -1,22 +1,37 @@
 from PIL import Image
+from pprint import pprint # for nicely displaying the output
 
-# store the image in a variable to start manipulating
-im = Image.open("rollercoaster.jpg")
+def get_rows(pixels: list, width: int) -> list:
+    return [pixels[x : x + width] for x in range(0, len(pixels), width)]
 
-# resize the image to decrease the number of pixels
 
-width: int = 10
-height: int = 10
-resized_image = im.resize((width, height))
+def main():
+    # store the image in a variable to start manipulating
+    im = Image.open("rollercoaster.jpg")
 
-# get the pixels
+    # resize the image to decrease the number of pixels
 
-pixels = list(resized_image.getdata())
+    width: int = 10
+    height: int = 10
+    resized_image = im.resize(
+        (width, height)
+    )  # TODO: apply image filter for upscaling - https://pillow.readthedocs.io/en/stable/handbook/concepts.html#filters
 
-print(pixels)
+    # get the pixels
 
-# get the number of channels
+    pixels = list(resized_image.getdata())
 
-no_of_channels: int = len(resized_image.getbands())
+    # print(pixels)
 
-print("the no of channels are", no_of_channels)
+    rows = get_rows(pixels, width)
+    pprint(rows)
+
+    # get the number of channels
+
+    no_of_channels: int = len(resized_image.getbands())
+
+    print("the no of channels are", no_of_channels)
+
+
+if __name__ == "__main__":
+    main()
