@@ -3,6 +3,8 @@ import { FaGithub } from 'react-icons/fa';
 
 import { Logo } from './logo';
 
+// needs remodification - can use the footer on chakra-ui website
+
 export default function Footer() {
 	return (
 		<Box as="footer" role="contentinfo" py="6">

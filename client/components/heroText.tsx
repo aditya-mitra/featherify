@@ -1,6 +1,7 @@
 import NextLink from 'next/link';
 import { Box, Button, Container, Divider, Stack, Text } from '@chakra-ui/react';
 import { GiLightningHelix } from 'react-icons/gi';
+import { SiReadthedocs } from 'react-icons/si';
 
 export default function HeroText() {
 	return (
@@ -28,7 +29,8 @@ export default function HeroText() {
 							opacity={0.7}
 							fontSize={{ base: 'lg', lg: 'xl' }}
 							mt="6">
-							<strong>DynaImage</strong> is a fast and fully customizable application which allows you to dynamically generate a blurred image for your image.
+							<strong>DynaImage</strong> is a fast and fully customizable application
+							which allows you to dynamically generate a blurred image for your image.
 						</Text>
 
 						<Stack
@@ -36,7 +38,7 @@ export default function HeroText() {
 							spacing="4"
 							justify="center"
 							direction={{ base: 'column', sm: 'row' }}>
-							<NextLink href="/docs">
+							<NextLink href="/play">
 								<Button
 									h="4rem"
 									px="40px"
@@ -48,9 +50,18 @@ export default function HeroText() {
 									Playground
 								</Button>
 							</NextLink>
-							<Button as="a" size="lg" h="4rem" px="40px" fontSize="1.2rem">
-								Documentation
-							</Button>
+							<NextLink href="/docs">
+								<Button
+									as="a"
+									size="lg"
+									h="4rem"
+									px="40px"
+									fontSize="1.2rem"
+									colorScheme="orange"
+									rightIcon={<SiReadthedocs fontSize="1.1em" />}>
+									Documentation
+								</Button>
+							</NextLink>
 						</Stack>
 					</Box>
 				</Container>
