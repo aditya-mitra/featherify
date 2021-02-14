@@ -11,12 +11,12 @@ resized_image = im.resize((width, height))
 
 # get the pixels
 
-pixels = list(resized_image .getdata())
+pixels = list(resized_image.getdata())
 
-print(pixels) 
+print(pixels)
 
 # get the number of channels
 
-no_of_channels:int = len(resized_image.getbands)
+no_of_channels: int = len(resized_image.getbands())
 
-print('the no of channels are',no_of_channels)
+print("the no of channels are", no_of_channels)
