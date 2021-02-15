@@ -16,8 +16,7 @@ export default function BuiltUsing() {
 							DynaImages
 						</Feature>
 						<Feature title="NextJS" icon={<SiNextDotJs />}>
-							NextJS is the React Framework we used for supporting our Playground,
-							Documentation and this Website.
+							NextJS is the React Framework we used for supporting our Playground and this Website.
 						</Feature>
 						<Feature title="Pillow" icon={<SiPython />}>
 							Pillow is the Python Image Processing Library that we are using to

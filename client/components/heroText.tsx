@@ -5,7 +5,7 @@ import { SiReadthedocs } from 'react-icons/si';
 export default function HeroText() {
 	return (
 		<Box mb={0}>
-			<Box as="section" pt={{ base: '10rem' }} pb={{ base: '0', md: '5rem' }}>
+			<Box as="section" pt={{ base: '5rem' }} pb={{ base: '0', md: '5rem' }}>
 				<Container>
 					<Box textAlign="center">
 						<Text

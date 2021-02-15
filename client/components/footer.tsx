@@ -1,5 +1,4 @@
-import { Box, Flex, IconButton, Link, Stack, Text } from '@chakra-ui/react';
-import { FaGithub } from 'react-icons/fa';
+import { Box, Flex, Link, Stack, Text } from '@chakra-ui/react';
 
 import { Logo } from './logo';
 
@@ -32,13 +31,6 @@ export default function Footer() {
 						</Link>
 					</Text>
 				</Stack>
-
-				<IconButton
-					as="a"
-					href="https://github.com"
-					aria-label="GitHub Repository"
-					icon={<FaGithub />}
-				/>
 			</Flex>
 		</Box>
 	);
