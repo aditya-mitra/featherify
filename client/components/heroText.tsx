@@ -1,11 +1,10 @@
-import NextLink from 'next/link';
-import { Box, Button, Container, Divider, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Stack, Text } from '@chakra-ui/react';
 import { GiLightningHelix } from 'react-icons/gi';
 import { SiReadthedocs } from 'react-icons/si';
 
 export default function HeroText() {
 	return (
-		<Box mb={20}>
+		<Box mb={0}>
 			<Box as="section" pt={{ base: '10rem' }} pb={{ base: '0', md: '5rem' }}>
 				<Container>
 					<Box textAlign="center">
@@ -38,36 +37,32 @@ export default function HeroText() {
 							spacing="4"
 							justify="center"
 							direction={{ base: 'column', sm: 'row' }}>
-							<NextLink href="/play">
-								<Button
-									h="4rem"
-									px="40px"
-									fontSize="1.2rem"
-									as="a"
-									size="lg"
-									colorScheme="teal"
-									rightIcon={<GiLightningHelix fontSize="1.2em" />}>
-									Playground
-								</Button>
-							</NextLink>
-							<NextLink href="/docs">
-								<Button
-									as="a"
-									size="lg"
-									h="4rem"
-									px="40px"
-									fontSize="1.2rem"
-									colorScheme="orange"
-									rightIcon={<SiReadthedocs fontSize="1.1em" />}>
-									Documentation
-								</Button>
-							</NextLink>
+							<Button
+								as="a"
+								href="/play"
+								h="4rem"
+								px="40px"
+								fontSize="1.2rem"
+								size="lg"
+								colorScheme="teal"
+								rightIcon={<GiLightningHelix fontSize="1.2em" />}>
+								Playground
+							</Button>
+							<Button
+								as="a"
+								href="/docs"
+								size="lg"
+								h="4rem"
+								px="40px"
+								fontSize="1.2rem"
+								colorScheme="orange"
+								rightIcon={<SiReadthedocs fontSize="1.1em" />}>
+								Documentation
+							</Button>
 						</Stack>
 					</Box>
 				</Container>
 			</Box>
-
-			<Divider />
 		</Box>
 	);
 }
