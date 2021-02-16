@@ -1,10 +1,12 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 import {
 	Box,
 	Button,
 	FormControl,
 	FormLabel,
 	Select,
+	InputGroup,
+	InputRightAddon,
 	NumberInput,
 	NumberInputField,
 	NumberIncrementStepper,
@@ -31,6 +33,7 @@ export default function Controls() {
 						payload: { dimensions: parseInt(curVal, 10) },
 					})
 				}
+				rightSideDisplay={`${controlState.dimensions * controlState.dimensions} px`}
 				max={50}
 				min={5}
 				step={1}
@@ -44,6 +47,7 @@ export default function Controls() {
 						payload: { blur: parseFloat(curVal) },
 					})
 				}
+				rightSideDisplay={'px'}
 				max={30.0}
 				min={0.0}
 				step={0.5}
@@ -83,26 +87,37 @@ export default function Controls() {
 	);
 }
 
-function NumberField({ val, label, step, min, max, onChange }: INumberFieldProps) {
+function NumberField({
+	val,
+	label,
+	step,
+	min,
+	max,
+	onChange,
+	rightSideDisplay,
+}: INumberFieldProps) {
 	return (
 		<Box my="1.5">
 			<FormControl id={label}>
 				<FormLabel>
 					<strong>{label}</strong>
 				</FormLabel>
-				<NumberInput
-					max={max}
-					min={min}
-					step={step}
-					value={val.toString()}
-					onChange={onChange}
-					clampValueOnBlur={true}>
-					<NumberInputField />
-					<NumberInputStepper>
-						<NumberIncrementStepper />
-						<NumberDecrementStepper />
-					</NumberInputStepper>
-				</NumberInput>
+				<InputGroup>
+					<NumberInput
+						max={max}
+						min={min}
+						step={step}
+						value={val.toString()}
+						onChange={onChange}
+						clampValueOnBlur={true}>
+						<NumberInputField />
+						<NumberInputStepper>
+							<NumberIncrementStepper />
+							<NumberDecrementStepper />
+						</NumberInputStepper>
+					</NumberInput>
+					{rightSideDisplay && <InputRightAddon children={rightSideDisplay} />}
+				</InputGroup>
 			</FormControl>
 		</Box>
 	);
@@ -137,6 +152,7 @@ interface INumberFieldProps {
 	val: number;
 	step: number;
 	onChange: ChakraUseCounterProps['onChange'];
+	rightSideDisplay?: ReactNode;
 }
 
 interface IDropdownSelectProps {

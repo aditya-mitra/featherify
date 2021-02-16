@@ -69,6 +69,8 @@ function NavButton({ name }: { name: string }) {
 	);
 }
 
+// REPLACE WITH Drawer OR Accordion
+
 function MobileNavButton() {
 	return (
 		<IconButton

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Box, IconButton, GridItem, Grid, Tooltip } from '@chakra-ui/react';
+import { Box, IconButton, GridItem, Grid, Tooltip, CloseButton } from '@chakra-ui/react';
 
 import { InputImage, OutputImage } from '@/components/output/images';
 import ControlInputs from '@/components/output/controlInputs';
@@ -44,15 +44,14 @@ function OutputPlay({ providerValue, uniqueId }: IOutputPlayProps) {
 function RemoveItemButton({ id }: { id: string | number }) {
 	return (
 		<Tooltip label="Remove this item" hasArrow>
-			<IconButton
+			<CloseButton
+				size="sm"
 				position="absolute"
 				top="-3"
 				right="-3"
-				isRound={true}
-				colorScheme="red"
-				aria-label="Remove this Item"
-				size="sm"
-				icon={<GrClose />}
+				backgroundColor='red.100'
+				_hover={{bg:'red.500'}}
+				_focus={{bg:'red.500'}}
 				onClick={() => console.log('removing ' + id)}
 			/>
 		</Tooltip>
