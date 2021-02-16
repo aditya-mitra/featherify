@@ -1,34 +1,5 @@
-import { Box, GridItem, Grid } from '@chakra-ui/react';
-
-import { InputImage, OutputImage } from '@/components/outputs/images';
-import ControlInputs from '@/components/outputs/controlInputs';
+import OutputPlay from '@/components/output';
 import Layout from './layout';
-import CodeBlock from '@/components/outputs/codeBlock';
-import { ControlProvider, IOutputPlayProps } from '@/contexts/control';
-
-function OutputPlay({ providerValue }: IOutputPlayProps) {
-	// memoize the individual components at the last moment
-	return (
-		<ControlProvider providerValue={providerValue}>
-			<Box px="8">
-				<Grid h="200px" templateColumns="repeat(4, 1fr)" gap={4}>
-					<GridItem>
-						<ControlInputs />
-					</GridItem>
-					<GridItem bg="papayawhip" color="blue">
-						<InputImage src="https://source.unsplash.com/random" />
-					</GridItem>
-					<GridItem bg="tomato">
-						<OutputImage />
-					</GridItem>
-					<GridItem>
-						<CodeBlock code={'text is overflowing when height is very big'} />
-					</GridItem>
-				</Grid>
-			</Box>
-		</ControlProvider>
-	);
-}
 
 export default function Playground() {
 	return (
@@ -39,9 +10,10 @@ export default function Playground() {
 					dimensions: 6.0,
 					format: 'base64',
 					imgSrc: 'https://source.unsplash.com/random',
-					scale: 1.10,
+					scale: 1.1,
+					code: 'text is overflowing when height is very big',
 				}}
-				uniqueId={8}
+				uniqueId={9}
 			/>
 		</Layout>
 	);

@@ -1,5 +1,5 @@
-import BuiltUsing from '@/components/builtUsing';
-import HeroText from '@/components/heroText';
+import BuiltUsing from '@/components/landing/builtUsing';
+import HeroText from '@/components/landing/heroText';
 import Layout from './layout';
 
 export default function Home() {

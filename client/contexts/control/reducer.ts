@@ -6,6 +6,7 @@ export const initialValue: IState = {
 	blur: 1.5,
 	scale: 1.2,
 	format: 'css',
+	code: 'getting the output',
 };
 
 export function lazyInit(providedValue: IState): IState {
@@ -15,7 +16,7 @@ export function lazyInit(providedValue: IState): IState {
 export function reducer(state: IState, action: IAction): IState {
 	const { dimensions, scale, blur, format } = action.payload as Required<IActionPayload>;
 
-	console.log('the displathed is',action.payload)
+	console.log('the displathed is', action.payload);
 	switch (action.type) {
 		case 'CHANGE_DIMENSIONS':
 			return { ...state, dimensions };
@@ -36,7 +37,7 @@ type ActionType = 'CHANGE_DIMENSIONS' | 'CHANGE_BLUR' | 'CHANGE_SCALE' | 'CHANGE
 
 export type FormatType = 'css' | 'base64';
 
-type IActionPayload = Omit<Partial<IState>, 'imgSrc'>;
+type IActionPayload = Omit<Partial<IState>, 'imgSrc' | 'code'>;
 
 interface IAction {
 	type: ActionType;
@@ -49,6 +50,7 @@ export interface IState {
 	blur: number;
 	scale: number;
 	format: FormatType;
+	code: string;
 }
 
 export interface IControlProviderProps {

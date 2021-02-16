@@ -1,14 +1,22 @@
 import { Box, Button, ButtonProps, Code, useClipboard } from '@chakra-ui/react';
 
-export default function CodeBlock({ code, isJSON }: { code: string; isJSON?: boolean }) {
-	const copyCode = isJSON ? JSON.stringify(code, null, 4).replace(/"([^"]+)":/g, '$1:') : code;
+import { useControl } from '@/contexts/control';
+
+// TODO : NEEDS Refactor (IMPORTANT)
+
+export default function CodeBlock() {
+	const {
+		controlState: { code },
+	} = useControl();
+	
+	const copyCode = JSON.stringify(code, null, 4).replace(/"([^"]+)":/g, '$1:');
 
 	const { hasCopied, onCopy } = useClipboard(copyCode);
 
 	return (
-		<Box position="relative" zIndex="0" m="2" h='200px'>
+		<Box position="relative" zIndex="0" m="2" h="200px">
 			<Box padding="5" rounded="8px" my="8">
-				<Code p="4" >{copyCode}</Code>
+				<Code p="4">{copyCode}</Code>
 			</Box>
 			<CopyButton top="1.5" onClick={onCopy}>
 				{hasCopied ? 'copied' : 'copy'}

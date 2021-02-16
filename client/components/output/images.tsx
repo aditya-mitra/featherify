@@ -3,6 +3,7 @@ export function InputImage({ src }: { src: string }) {
 }
 
 export function OutputImage() {
+	// needs refactoring for base64 and css codes
 	return (
 		<div>
 			<img src="https://source.unsplash.com/random" alt="output image" />

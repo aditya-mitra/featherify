@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import NavbarContent from '@/components/navbar';
-import Footer from '@/components/footer';
+import NavbarContent from '@/components/universal/navbar';
+import Footer from '@/components/universal/footer';
 
 export default function Layout({ children: WrappedComponents }: { children: ReactNode }) {
 	return (
