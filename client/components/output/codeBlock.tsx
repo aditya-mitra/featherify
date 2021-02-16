@@ -8,7 +8,7 @@ export default function CodeBlock() {
 	const {
 		controlState: { code },
 	} = useControl();
-	
+
 	const copyCode = JSON.stringify(code, null, 4).replace(/"([^"]+)":/g, '$1:');
 
 	const { hasCopied, onCopy } = useClipboard(copyCode);
@@ -18,9 +18,7 @@ export default function CodeBlock() {
 			<Box padding="5" rounded="8px" my="8">
 				<Code p="4">{copyCode}</Code>
 			</Box>
-			<CopyButton top="1.5" onClick={onCopy}>
-				{hasCopied ? 'copied' : 'copy'}
-			</CopyButton>
+			<CopyButton onClick={onCopy}>{hasCopied ? 'copied' : 'copy'}</CopyButton>
 		</Box>
 	);
 }
@@ -34,7 +32,7 @@ function CopyButton(props: ButtonProps) {
 			colorScheme="messenger"
 			fontSize="xs"
 			height="24px"
-			top={0}
+			top="1.5"
 			zIndex="1"
 			right="1.25em"
 			{...props}

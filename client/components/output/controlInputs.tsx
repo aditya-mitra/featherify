@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 import {
 	Box,
+	Button,
 	FormControl,
 	FormLabel,
 	Select,
@@ -71,6 +72,13 @@ export default function Controls() {
 					})
 				}
 			/>
+			<Button
+				mt="3.5"
+				variant="outline"
+				colorScheme="pink"
+				onClick={() => dispatchControl({ type: 'RESET', payload: {} })}>
+				Reset All Values
+			</Button>
 		</Box>
 	);
 }

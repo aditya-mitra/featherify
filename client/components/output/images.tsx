@@ -1,12 +1,18 @@
+import { Box } from '@chakra-ui/react';
+
 export function InputImage({ src }: { src: string }) {
-	return <img src={src} alt="random image" />;
+	return (
+		<Box h="450px">
+			<img src={src} alt="random image" style={{ maxHeight: '100%', maxWidth: '100%' }} />
+		</Box>
+	);
 }
 
 export function OutputImage() {
 	// needs refactoring for base64 and css codes
 	return (
-		<div>
+		<Box h="450px">
 			<img src="https://source.unsplash.com/random" alt="output image" />
-		</div>
+		</Box>
 	);
 }

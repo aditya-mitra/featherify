@@ -13,7 +13,7 @@ export default function Playground() {
 					scale: 1.1,
 					code: 'text is overflowing when height is very big',
 				}}
-				uniqueId={9}
+				uniqueId="9"
 			/>
 		</Layout>
 	);

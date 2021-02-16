@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import {
 	Link,
 	Flex,
@@ -7,23 +6,15 @@ import {
 	Switch,
 	Box,
 	Button,
+	IconButton,
 	useColorModeValue,
-	useDisclosure,
 	useColorMode,
-	useUpdateEffect,
 } from '@chakra-ui/react';
 import { SiGithub } from 'react-icons/si';
 import { FiMoon, FiSun } from 'react-icons/fi';
+import { AiOutlineMenu } from 'react-icons/ai';
 
 export default function NavbarContent() {
-	const mobileNav = useDisclosure();
-
-	const mobileNavBtnRef = useRef<HTMLButtonElement>();
-
-	useUpdateEffect(() => {
-		mobileNavBtnRef.current?.focus();
-	}, [mobileNav.isOpen]);
-
 	return (
 		<>
 			<Flex w="100%" my="2.5" h="100%" px="6" align="center" justify="space-between">
@@ -46,11 +37,7 @@ export default function NavbarContent() {
 							<Icon as={SiGithub} w="5" h="5" />
 						</Link>
 
-						{/* <MobileNavButton
-						ref={mobileNavBtnRef}
-						aria-label="Open Menu"
-						onClick={mobileNav.onOpen}
-					/> */}
+						<MobileNavButton />
 					</HStack>
 					<ColorModeSwitch />
 				</Flex>
@@ -81,3 +68,81 @@ function NavButton({ name }: { name: string }) {
 		</Button>
 	);
 }
+
+function MobileNavButton() {
+	return (
+		<IconButton
+			display={{ base: 'flex', md: 'none' }}
+			aria-label="Open SideBar Menu"
+			fontSize="20px"
+			color={useColorModeValue('gray.800', 'inherit')}
+			variant="ghost"
+			icon={<AiOutlineMenu />}
+		/>
+	);
+}
+
+//   export function SidebarContent(props: SidebarContentProps) {
+// 	return (
+// 	  <>
+// 				<chakra.h4
+// 				  fontSize="sm"
+// 				  fontWeight="bold"
+// 				  my="1.25rem"
+// 				  textTransform="uppercase"
+// 				  letterSpacing="wider"
+// 				  color={useColorModeValue("gray.700", "inherit")}
+// 				>
+// 				  {lvl1.title}
+// 				</chakra.h4>
+
+// 			  {lvl1.routes.map((lvl2, index) => {
+// 				if (!lvl2.routes) {
+// 				  return (
+// 					<SidebarLink ml="-3" mt="2" key={lvl2.path} href={lvl2.path}>
+// 					  {lvl2.title}
+// 					</SidebarLink>
+// 				  )
+// 				}
+
+// 				const selected = pathname.startsWith(lvl2.path)
+// 				const opened = selected || lvl2.open
+
+// 				const sortedRoutes = !!lvl2.sort
+// 				  ? _.sortBy(lvl2.routes, (i) => i.title)
+// 				  : lvl2.routes
+
+// 				return (
+// 				  <SidebarCategory
+// 					contentRef={contentRef}
+// 					key={lvl2.path + index}
+// 					title={lvl2.title}
+// 					selected={selected}
+// 					opened={opened}
+// 				  >
+// 					<Stack as="ul">
+// 					  {sortedRoutes.map((lvl3) => (
+// 						<SidebarLink as="li" key={lvl3.path} href={lvl3.path}>
+// 						  <span>{convertBackticksToInlineCode(lvl3.title)}</span>
+// 						  {lvl3.new && (
+// 							<Badge
+// 							  ml="2"
+// 							  lineHeight="tall"
+// 							  fontSize="10px"
+// 							  variant="solid"
+// 							  colorScheme="purple"
+// 							>
+// 							  New
+// 							</Badge>
+// 						  )}
+// 						</SidebarLink>
+// 					  ))}
+// 					</Stack>
+// 				  </SidebarCategory>
+// 				)
+// 			  })}
+// 		  )
+// 		})}
+// 	  </>
+// 	)
+//   }
