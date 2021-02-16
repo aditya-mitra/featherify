@@ -7,7 +7,6 @@ import CodeBlock from '@/components/output/codeBlock';
 import { ControlProvider, IOutputPlayProps } from '@/contexts/control';
 
 function OutputPlay({ providerValue }: IOutputPlayProps) {
-	// memoize the individual components at the last moment
 	return (
 		<Box px="8">
 			<Grid h="200px" templateColumns="repeat(4, 1fr)" gap={4}>

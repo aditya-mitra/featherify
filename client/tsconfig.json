@@ -16,6 +16,9 @@
 			],
 			"@/contexts/*": [
 				"contexts/*"
+			],
+			"@/hooks/*": [
+				"hooks/*"
 			]
 		},
 		"allowJs": true,
