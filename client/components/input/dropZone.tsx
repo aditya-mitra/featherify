@@ -1,5 +1,5 @@
 import { useCallback, useState, DragEvent } from 'react';
-import { Avatar, Badge, Box, BoxProps, Button, Flex, Spacer, Stack, Text } from '@chakra-ui/react';
+import { Avatar, Badge, Box, BoxProps, Button, Flex, Stack, Text } from '@chakra-ui/react';
 
 import { getValidFileAndStatuses, FileStatusType } from './filesHandler';
 
