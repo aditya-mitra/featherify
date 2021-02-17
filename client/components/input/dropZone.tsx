@@ -1,34 +1,47 @@
 import { useCallback, useState, DragEvent } from 'react';
-import { Avatar, Badge, Box, BoxProps, Button, Flex, Stack, Text } from '@chakra-ui/react';
+import {
+	Box,
+	BoxProps,
+	Button,
+	Flex,
+	Stack,
+	SimpleGrid,
+	Text,
+	Icon,
+	Image,
+	useColorModeValue,
+} from '@chakra-ui/react';
+import { VscCheck, VscClose } from 'react-icons/vsc';
+import { MdError } from 'react-icons/md';
 
-import { getValidFileAndStatuses, FileStatusType } from './filesHandler';
+import { getFileDatas,FileInfoTypes} from './filesHandler';
 
 export default function DropZone() {
-	const [receivedFiles, setReceivedFiles] = useState<File[]>([]); // has to be highly elevated state with context for input and output
-	const [fileStatuses, setFileStatuses] = useState<FileStatusType[]>([]);
+	const [fileInfos, setFileInfos] = useState<FileInfoTypes[]>([]);
 
 	const handleOnDrop = useCallback(async (e: DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
 
-		const { validFiles, statuses } = await getValidFileAndStatuses(e.dataTransfer.files);
-		setReceivedFiles((prev) => prev.concat(validFiles));
-		setFileStatuses((prev) => prev.concat(statuses));
+		const { fileInfos } = await getFileDatas(e.dataTransfer.files);
+		setFileInfos((prev) => prev.concat(fileInfos));
 	}, []);
 
-	console.log('rec', receivedFiles);
+	const handleRemove = useCallback(
+		(idx: number) => {
+			const tempArray = [...fileInfos];
+			tempArray.splice(idx,1);
+			setFileInfos(tempArray);
+		},
+		[fileInfos]
+	);
+
+	console.log('rec', fileInfos);
 
 	return (
 		<Box my="8">
 			<DropZoneCatcher onDrop={handleOnDrop}>
-				{fileStatuses.length > 0 ? (
-					fileStatuses.map((fileStatus) => (
-						<DropZoneStatus
-							name={fileStatus.name}
-							size={fileStatus.size ?? ''}
-							src={fileStatus.imgSrc ?? ''}
-							valid={fileStatus.valid}
-						/>
-					))
+				{fileInfos.length > 0 ? (
+					<DropZoneTable statuses={fileInfos} handleRemove={handleRemove} />
 				) : (
 					<DropZoneInitialText />
 				)}
@@ -71,34 +84,95 @@ function DropZoneInitialText() {
 	);
 }
 
-function DropZoneStatus({ size, name, src }: IDropZoneStatus) {
+function DropZoneTable({ statuses, handleRemove }: IDropZoneTableProps) {
 	return (
-		<Stack
-			direction={{ base: 'column', md: 'row' }}
-			spacing="6"
-			mx="auto"
-			shadow="md"
-			rounded="lg"
-			border="1px"
-			px="2">
-			<Flex direction={{ base: 'column', md: 'row' }} w="3xl" alignItems="center">
-				<Box mx="2">
-					<Avatar size="lg" src={src} />
-				</Box>
-				<Box mx="2">
-					<Text fontWeight="semibold">{name}</Text>
-				</Box>
-				<Box mx="2">
-					<Badge>{size}</Badge>
-				</Box>
-			</Flex>
-		</Stack>
+		<Flex mx="6.5" w="full" p={50} alignItems="center" justifyContent="center">
+			<Stack
+				direction={{ base: 'column' }}
+				w="full"
+				bg={{ sm: useColorModeValue('white', 'gray.800') }}
+				shadow="lg">
+				<Flex
+					direction={{ base: 'row', sm: 'column' }}
+					textAlign="center"
+					bg={useColorModeValue('white', 'gray.800')}>
+					<DropZoneTableHeader />
+					{statuses.map(({ name, valid, imgSrc = '', size = '-' }, idx) => (
+						<SimpleGrid
+							key={`${name}-${idx}`}
+							spacingY={3}
+							columns={{ base: 1, sm: 5 }}
+							w="full"
+							py={2}
+							px={10}
+							verticalAlign="middle"
+							fontWeight="hairline">
+							<Box mx="2" display="flex" justifyContent="center">
+								<Image
+									htmlHeight="55px"
+									htmlWidth="55px"
+									src={imgSrc}
+									fallback={<Icon as={MdError} />}
+								/>
+							</Box>
+							<Text
+								as="em"
+								textOverflow="ellipsis"
+								overflow="hidden"
+								whiteSpace="nowrap"
+								textAlign="center">
+								{name}
+							</Text>
+							<Box>
+								<Text as="samp">{size}</Text>
+							</Box>
+							<Box>
+								{valid ? (
+									<Icon as={VscCheck} color="green.400" />
+								) : (
+									<Icon as={VscClose} color="red.400" />
+								)}
+							</Box>
+							<Button
+								colorScheme="red"
+								size="sm"
+								width="50%"
+								onClick={() => handleRemove(idx)}>
+								Remove
+							</Button>
+						</SimpleGrid>
+					))}
+				</Flex>
+				<Button colorScheme="twitter" borderRadius="none">
+					Upload All
+				</Button>
+			</Stack>
+		</Flex>
 	);
 }
 
-interface IDropZoneStatus {
-	size: string;
-	name: string;
-	src: string;
-	valid: boolean;
+function DropZoneTableHeader() {
+	return (
+		<SimpleGrid
+			spacingY={3}
+			columns={{ base: 1, sm: 5 }}
+			w={{ base: 100, sm: 'full' }}
+			textTransform="uppercase"
+			bg={useColorModeValue('gray.100', 'gray.700')}
+			color={useColorModeValue('gray.500', 'gray.800')}
+			py={{ base: 1, sm: 4 }}
+			px={{ base: 2, sm: 10 }}
+			fontSize="sm"
+			fontWeight="extrabold">
+			<Text>Display</Text>
+			<Text>File Name</Text>
+			<Text>Size</Text>
+			<Text>Valid</Text>
+		</SimpleGrid>
+	);
+}
+
+interface IDropZoneTableProps {
+	statuses: FileInfoTypes[];
+	handleRemove: (id: number) => void;
 }

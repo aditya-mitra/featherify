@@ -1,31 +1,30 @@
 
-export async function getValidFileAndStatuses(files: FileList) {
-	const validFiles: File[] = [];
-	const statuses: FileStatusType[] = [];
+export async function getFileDatas(files: FileList) {
+	const fileInfos: FileInfoTypes[] = [];
 
 	for (let i = 0; i < files.length; i++) {
-		const fileData = await getFileData(files[i]);
+		const fileData = await getFileInfo(files[i]);
 
 		// skip for duplicate files
-		if (validFiles.find((item) => item.name === files[i].name)) continue;
+		if (fileInfos.find((item) => item.name === files[i].name)) continue;
 
 		if (isFileValid(files[i]) && fileData) {
-			statuses.push({
+			fileInfos.push({
 				valid: true,
 				name: files[i].name,
 				size: getReadableFileSize(files[i].size),
 				imgSrc: fileData.src,
+				data:files[i]
 			});
-			validFiles.push(files[i]);
 		} else {
-			statuses.push({ valid: false, name: files[i].name });
+			fileInfos.push({ valid: false, name: files[i].name });
 		}
 	}
 
-	return { validFiles, statuses };
+	return {  fileInfos };
 }
 
-function getFileData(file: File): Promise<{ src: string | undefined } | undefined> {
+function getFileInfo(file: File): Promise<{ src: string | undefined } | undefined> {
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
 		reader.readAsDataURL(file);
@@ -48,9 +47,10 @@ function isFileValid(file: File) {
 	return ['image/jpeg', 'image/jpg', 'image/png', 'image/x-icon'].includes(file.type);
 }
 
-export type FileStatusType = {
+export type FileInfoTypes = {
 	valid: boolean;
 	name: string;
 	imgSrc?: string | undefined;
 	size?: string;
+	data?:File;
 };
