@@ -11,6 +11,11 @@ const dyna = axios.create({
 });
 
 export async function getDynaImageFromFiles(formdata: FormData): Promise<void> {
+	axios
+		.get('http://localhost:8000/api/manipulate')
+		.then((response) => console.log(response.data))
+		.catch((error) => console.log(error));
+
 	return new Promise((resolve) => {
 		setTimeout(resolve, 5000);
 		console.log('dyna');
