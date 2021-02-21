@@ -1,8 +1,8 @@
 from PIL import Image
 from io import BytesIO
-from requests import get as requestget
+from requests import get as requestget, exceptions as requestexecptions
 from django.core.files.uploadedfile import InMemoryUploadedFile
-from typing import List, Tuple, AnyStr
+from typing import List, Dict, Tuple, AnyStr
 
 
 def get_rows(pixels: List[Tuple], width: int) -> List[List[Tuple]]:
@@ -77,32 +77,42 @@ def get_image_position(gradients: List[AnyStr]) -> str:
     return ",".join(positions)
 
 
-def get_image_css(content: BytesIO, name: str) -> dict:
+def get_image_css(content: BytesIO) -> Dict[str, str]:
 
-    output = {"name": name}
+    im_data = get_image_data(content)
+    im_rows = im_data.get("rows")
+    im_gradient = get_linear_gradient(im_rows)
+
+    return {
+        "backgroundImage": ",".join(im_gradient),
+        "backgroundPosition": get_image_position(im_gradient),
+        "backgroundSize": get_image_size(im_gradient),
+    }
+
+
+def get_image_css_from_file(file_data: InMemoryUploadedFile) -> Dict[str, str]:
+    output = {"name": file_data.name}
 
     try:
-        im_data = get_image_data(content)
-        im_rows = im_data.get("rows")
-        im_gradient = get_linear_gradient(im_rows)
-
-        output["styles"] = {
-            "backgroundImage": ",".join(im_gradient),
-            "backgroundPosition": get_image_position(im_gradient),
-            "backgroundSize": get_image_size(im_gradient),
-        }
-
+        output["styles"] = get_image_css(file_data.file)
     except:
-        output["error"] = "Could not process image for {}".format(name)
+        output["error"] = "problem processing file - {}".format(file_data.name)
 
     return output
 
 
-def get_image_css_from_file(file_data: InMemoryUploadedFile) -> dict:
-    return get_image_css(file_data.file, file_data.name)
+def get_image_css_from_url(url: str) -> Dict[str, str]:
+    output = {"name": url}
+    try:
 
+        response = requestget(url)
+        image_bytes = BytesIO(response.content)
+        output["styles"] = get_image_css(image_bytes)
 
-def get_image_css_from_url(url: str) -> dict:
-    response = requestget(url)
-    image_bytes = BytesIO(response.content)
-    return get_image_css(image_bytes, url)
+    except requestexecptions.RequestException as e:
+        output["error"] = "request for the url - {}".format(e)
+
+    except:
+        output["error"] = "problem processing url - {}".format(url)
+
+    return output

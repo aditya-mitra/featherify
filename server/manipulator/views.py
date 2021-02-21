@@ -22,15 +22,24 @@ class ManipulatorView(APIView):
         if "images" not in request.data and "urls" not in request.data:
             raise ParseError(detail="Neither urls nor images were not provided")
 
+        urls = (
+            "urls" in request.data
+            and type(request.data.get("urls")) == "list"
+            and request.data.get("urls")
+        ) or []
+
+        image_files = (
+            "images" in request.data and request.FILES.getlist("images")
+        ) or []
+
         resp = []
 
-        for file_data in request.FILES.getlist("images"):
+        for file_data in image_files:
             css = get_image_css_from_file(file_data)
             resp.append(css)
 
-        for url in request.data.get("urls"):
-            css = get_image_css_from_url(url)
+        for url in urls:
+            css = get_image_css_from_url(request.data.get("urls"))
             resp.append(css)
 
-        custom_resp = {"done": True}
         return Response(data=resp)
