@@ -2,30 +2,14 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@/components/*": [
-				"components/*"
-			],
-			"@/pages/*": [
-				"pages/*"
-			],
-			"@/views/*": [
-				"views/*"
-			],
-			"@/contexts/*": [
-				"contexts/*"
-			],
-			"@/hooks/*": [
-				"hooks/*"
-			],
-			"@/utils/*": [
-				"utils/*"
-			],
-			"@/lib/*": [
-				"lib/*"
-			],
-			"@/types/*": [
-				"types/*"
-			]
+			"@/components/*": ["components/*"],
+			"@/pages/*": ["pages/*"],
+			"@/views/*": ["views/*"],
+			"@/contexts/*": ["contexts/*"],
+			"@/hooks/*": ["hooks/*"],
+			"@/utils/*": ["utils/*"],
+			"@/lib/*": ["lib/*"],
+			"@/types/*": ["types/*"]
 		},
 		"allowJs": true,
 		"alwaysStrict": true,
@@ -33,10 +17,7 @@
 		"forceConsistentCasingInFileNames": true,
 		"isolatedModules": true,
 		"jsx": "preserve",
-		"lib": [
-			"dom",
-			"es2017"
-		],
+		"lib": ["dom", "es2017"],
 		"module": "esnext",
 		"moduleResolution": "node",
 		"noEmit": true,
@@ -48,11 +29,6 @@
 		"strict": true,
 		"target": "esnext"
 	},
-	"exclude": [
-		"node_modules"
-	],
-	"include": [
-		"**/*.ts",
-		"**/*.tsx"
-	]
+	"exclude": ["node_modules"],
+	"include": ["**/*.ts", "**/*.tsx"]
 }

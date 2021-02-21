@@ -49,9 +49,9 @@ function RemoveItemButton({ id }: { id: string | number }) {
 				position="absolute"
 				top="-3"
 				right="-3"
-				backgroundColor='red.100'
-				_hover={{bg:'red.500'}}
-				_focus={{bg:'red.500'}}
+				backgroundColor="red.100"
+				_hover={{ bg: 'red.500' }}
+				_focus={{ bg: 'red.500' }}
 				onClick={() => console.log('removing ' + id)}
 			/>
 		</Tooltip>

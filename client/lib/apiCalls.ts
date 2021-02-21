@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { GeneratedType } from '@/types/index';
+
 const BASEURL =
 	process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api/manipulate' : 'amplify url';
 
@@ -10,16 +12,17 @@ const dyna = axios.create({
 	headers: { 'Content-Type': 'multipart/form-data' },
 });
 
-export async function getDynaImageFromFiles(formdata: FormData): Promise<void> {
-	axios
-		.get('http://localhost:8000/api/manipulate')
-		.then((response) => console.log(response.data))
-		.catch((error) => console.log(error));
+export async function getDynaImageFromFiles(formdata: FormData): Promise<IResponse> {
+	return dyna({
+		data: formdata,
+	})
+		.then((response) => response.data)
+		.then((data) => ({ success: true, dyna: data }))
+		.catch((error) => ({ success: false, error: JSON.stringify(error) }));
+}
 
-	return new Promise((resolve) => {
-		setTimeout(resolve, 5000);
-		console.log('dyna');
-		console.log(formdata.getAll('images'), 'are the images');
-		console.log(formdata.getAll('urls'), 'are the urls');
-	});
+interface IResponse {
+	success: boolean;
+	dyna?: Array<GeneratedType>;
+	error?: string;
 }

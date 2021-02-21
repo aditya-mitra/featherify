@@ -5,3 +5,9 @@ export type FileInfoType = {
 	size?: string;
 	data?: File;
 };
+
+// TODO: Rename this variable
+export type GeneratedType = {
+	name: string;
+	styles: object;
+};

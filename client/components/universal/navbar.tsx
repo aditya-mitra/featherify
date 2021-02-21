@@ -72,7 +72,6 @@ export default function NavbarContent() {
 							<NavButtons />
 						</VStack>
 					</Box>
-					
 				</Flex>
 			</Flex>
 		</>

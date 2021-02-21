@@ -17,8 +17,6 @@ import { useInputFiles, useInputLoading } from '@/contexts/input';
 export default function DropZone() {
 	const { fileInfos } = useInputFiles();
 
-	console.log('rec', fileInfos);
-
 	return (
 		<Box my="8">
 			<DropZoneCatcher>
