@@ -1,7 +1,6 @@
-import { useCallback, useState, useRef } from 'react';
+import { ReactNode, useRef } from 'react';
 import {
 	Box,
-	BoxProps,
 	Button,
 	Flex,
 	Stack,
@@ -13,47 +12,24 @@ import {
 } from '@chakra-ui/react';
 import { VscCheck, VscClose } from 'react-icons/vsc';
 import { MdError } from 'react-icons/md';
-
-import { getFileDatas, FileInfoTypes } from './filesHandler';
+import { useInputFiles } from '@/contexts/input';
 
 export default function DropZone() {
-	const [fileInfos, setFileInfos] = useState<FileInfoTypes[]>([]);
-
-	const handleAdd = useCallback(async (files: FileList | null) => {
-		if (!files || files.length === 0) return;
-		const { fileInfos } = await getFileDatas(files);
-		setFileInfos((prev) => prev.concat(fileInfos));
-	}, []);
-
-	const handleRemove = useCallback(
-		(idx: number) => {
-			const tempArray = [...fileInfos];
-			tempArray.splice(idx, 1);
-			setFileInfos(tempArray);
-		},
-		[fileInfos]
-	);
+	const { fileInfos } = useInputFiles();
 
 	console.log('rec', fileInfos);
 
 	return (
 		<Box my="8">
-			<DropZoneCatcher
-				onDrop={(e) => {
-					e.preventDefault();
-					handleAdd(e.dataTransfer.files);
-				}}>
-				{fileInfos.length > 0 ? (
-					<DropZoneTable statuses={fileInfos} handleRemove={handleRemove} />
-				) : (
-					<DropZoneInitialText handleAdd={handleAdd} />
-				)}
+			<DropZoneCatcher>
+				{fileInfos.length > 0 ? <DropZoneTable /> : <DropZoneInitialText />}
 			</DropZoneCatcher>
 		</Box>
 	);
 }
 
-function DropZoneCatcher(props: BoxProps) {
+function DropZoneCatcher({ children }: IDropZoneCatcherProps) {
+	const { handleAdd } = useInputFiles();
 	return (
 		<Box
 			m="3"
@@ -68,15 +44,18 @@ function DropZoneCatcher(props: BoxProps) {
 			onDragOver={(e) => e.preventDefault()}
 			onDragEnter={(e) => e.preventDefault()}
 			onDragLeave={(e) => e.preventDefault()}
-			{...props}>
-			{props.children}
+			onDrop={(e) => {
+				e.preventDefault();
+				handleAdd(e.dataTransfer.files);
+			}}>
+			{children}
 		</Box>
 	);
 }
 
-function DropZoneInitialText({ handleAdd }: IDropZoneInitialText) {
+function DropZoneInitialText() {
 	const inputRef = useRef<HTMLInputElement>(null);
-
+	const { handleAdd } = useInputFiles();
 	return (
 		<>
 			<Text fontSize="4xl" fontWeight="bold" color="facebook">
@@ -100,7 +79,8 @@ function DropZoneInitialText({ handleAdd }: IDropZoneInitialText) {
 	);
 }
 
-function DropZoneTable({ statuses, handleRemove }: IDropZoneTableProps) {
+function DropZoneTable() {
+	const { handleRemove, fileInfos: statuses } = useInputFiles();
 	return (
 		<Flex mx="6.5" w="full" p={50} alignItems="center" justifyContent="center">
 			<Stack
@@ -187,12 +167,6 @@ function DropZoneTableHeader() {
 		</SimpleGrid>
 	);
 }
-
-interface IDropZoneTableProps {
-	statuses: FileInfoTypes[];
-	handleRemove: (id: number) => void;
-}
-
-interface IDropZoneInitialText {
-	handleAdd: (files: FileList | null) => Promise<void>;
+interface IDropZoneCatcherProps {
+	children: ReactNode;
 }

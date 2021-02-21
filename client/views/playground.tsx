@@ -1,11 +1,11 @@
-import DropZone from '@/components/input/dropZone';
+import InputChamber from '@/components/input';
 import OutputPlay from '@/components/output';
 import Layout from './layout';
 
 export default function Playground() {
 	return (
 		<Layout>
-			<DropZone />
+			<InputChamber />
 			<OutputPlay
 				providerValue={{
 					blur: 18.5,

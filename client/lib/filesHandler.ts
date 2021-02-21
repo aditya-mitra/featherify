@@ -1,6 +1,7 @@
+import type { FileInfoType } from '@/types/index';
 
 export async function getFileDatas(files: FileList) {
-	const fileInfos: FileInfoTypes[] = [];
+	const fileInfos: FileInfoType[] = [];
 
 	for (let i = 0; i < files.length; i++) {
 		const fileData = await getFileInfo(files[i]);
@@ -14,14 +15,14 @@ export async function getFileDatas(files: FileList) {
 				name: files[i].name,
 				size: getReadableFileSize(files[i].size),
 				imgSrc: fileData.src,
-				data:files[i]
+				data: files[i],
 			});
 		} else {
 			fileInfos.push({ valid: false, name: files[i].name });
 		}
 	}
 
-	return {  fileInfos };
+	return { fileInfos };
 }
 
 function getFileInfo(file: File): Promise<{ src: string | undefined } | undefined> {
@@ -46,11 +47,3 @@ function getReadableFileSize(size: number) {
 function isFileValid(file: File) {
 	return ['image/jpeg', 'image/jpg', 'image/png', 'image/x-icon'].includes(file.type);
 }
-
-export type FileInfoTypes = {
-	valid: boolean;
-	name: string;
-	imgSrc?: string | undefined;
-	size?: string;
-	data?:File;
-};
