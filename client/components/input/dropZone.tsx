@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { VscCheck, VscClose } from 'react-icons/vsc';
 import { MdError } from 'react-icons/md';
-import { useInputFiles } from '@/contexts/input';
+import { useInputFiles, useInputLoading } from '@/contexts/input';
 
 export default function DropZone() {
 	const { fileInfos } = useInputFiles();
@@ -80,7 +80,8 @@ function DropZoneInitialText() {
 }
 
 function DropZoneTable() {
-	const { handleRemove, fileInfos: statuses } = useInputFiles();
+	const { handleRemove, fileInfos: statuses, handleSubmit } = useInputFiles();
+	const { loading, setLoading } = useInputLoading();
 	return (
 		<Flex mx="6.5" w="full" p={50} alignItems="center" justifyContent="center">
 			<Stack
@@ -139,7 +140,15 @@ function DropZoneTable() {
 						</SimpleGrid>
 					))}
 				</Flex>
-				<Button colorScheme="twitter" borderRadius="none">
+				<Button
+					type="submit"
+					colorScheme="twitter"
+					borderRadius="none"
+					onClick={() => {
+						setLoading(true);
+						handleSubmit();
+					}}
+					isLoading={loading}>
 					Upload All
 				</Button>
 			</Stack>

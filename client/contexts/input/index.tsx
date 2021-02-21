@@ -8,8 +8,10 @@ import {
 	useState,
 } from 'react';
 
+import { getFormData } from '@/lib/formData';
 import { getFileDatas } from '@/lib/filesHandler';
 import type { FileInfoType } from '@/types/index';
+import { getDynaImageFromFiles } from '@/lib/apiCalls';
 
 const InputContext = createContext<IInputContext>({
 	fileControl: {
@@ -17,12 +19,18 @@ const InputContext = createContext<IInputContext>({
 		setFileInfos: () => {},
 		handleAdd: () => Promise.resolve(),
 		handleRemove: () => {},
+		handleSubmit: () => {},
+	},
+	loadingControl: {
+		loading: false,
+		setLoading: () => {},
 	},
 });
 
 export function InputProvider({ children }: IInputProviderProps) {
 	// TODO: Add Debounced State here
 	const [fileInfos, setFileInfos] = useState<FileInfoType[]>([]);
+	const [loading, setLoading] = useState(false);
 
 	const handleAdd = useCallback(async (files: FileList | null) => {
 		if (!files || files.length === 0) return;
@@ -39,13 +47,30 @@ export function InputProvider({ children }: IInputProviderProps) {
 		[fileInfos]
 	);
 
-	const fileControl = { fileInfos, setFileInfos, handleAdd, handleRemove };
+	const handleSubmit = async () => {
+		const formDataWithImagesOrUrls = getFormData(fileInfos);
+		await getDynaImageFromFiles(formDataWithImagesOrUrls).then(() => {
+			setLoading(false);
+			setFileInfos([]);
+		});
+	};
 
-	return <InputContext.Provider value={{ fileControl }}>{children}</InputContext.Provider>;
+	const fileControl = { fileInfos, setFileInfos, handleAdd, handleRemove, handleSubmit };
+	const loadingControl = { loading, setLoading };
+
+	return (
+		<InputContext.Provider value={{ fileControl, loadingControl }}>
+			{children}
+		</InputContext.Provider>
+	);
 }
 
 export function useInputFiles() {
 	return useContext(InputContext).fileControl;
+}
+
+export function useInputLoading() {
+	return useContext(InputContext).loadingControl;
 }
 
 interface IInputContext {
@@ -54,6 +79,11 @@ interface IInputContext {
 		setFileInfos: Dispatch<SetStateAction<FileInfoType[]>>;
 		handleAdd: (files: FileList | null) => Promise<void>;
 		handleRemove: (idx: number) => void;
+		handleSubmit: () => void;
+	};
+	loadingControl: {
+		loading: boolean;
+		setLoading: Dispatch<SetStateAction<boolean>>;
 	};
 }
 
