@@ -1,13 +1,12 @@
 import { memo } from 'react';
-import { Box, IconButton, GridItem, Grid, Tooltip, CloseButton } from '@chakra-ui/react';
+import { Box, GridItem, Grid, Tooltip, CloseButton } from '@chakra-ui/react';
 
 import { InputImage, OutputImage } from '@/components/output/images';
 import ControlInputs from '@/components/output/controlInputs';
 import CodeBlock from '@/components/output/codeBlock';
-import { ControlProvider, IOutputPlayProps } from '@/contexts/control';
-import { GrClose } from 'react-icons/gr';
+import { PlayControlProvider, IPlayControlProps } from '@/contexts/control';
 
-function OutputPlay({ providerValue, uniqueId }: IOutputPlayProps) {
+function PlayWithOutput({ providerValue, uniqueId }: IPlayControlProps) {
 	return (
 		<Box
 			px="8"
@@ -21,7 +20,7 @@ function OutputPlay({ providerValue, uniqueId }: IOutputPlayProps) {
 			alignItems="center"
 			justifyContent="center">
 			<Grid templateColumns="repeat(auto-fit, minmax(200px,1fr))" gap={4} mt="3">
-				<ControlProvider providerValue={providerValue}>
+				<PlayControlProvider providerValue={providerValue}>
 					<GridItem>
 						<ControlInputs />
 					</GridItem>
@@ -34,7 +33,7 @@ function OutputPlay({ providerValue, uniqueId }: IOutputPlayProps) {
 					<GridItem>
 						<CodeBlock />
 					</GridItem>
-				</ControlProvider>
+				</PlayControlProvider>
 			</Grid>
 			<RemoveItemButton id={uniqueId} />
 		</Box>
@@ -59,6 +58,6 @@ function RemoveItemButton({ id }: { id: string | number }) {
 }
 
 export default memo(
-	OutputPlay,
+	PlayWithOutput,
 	(prevProps, nextProps) => prevProps.uniqueId === nextProps.uniqueId
 );

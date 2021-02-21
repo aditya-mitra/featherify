@@ -10,8 +10,9 @@ import {
 
 import { getFormData } from '@/lib/formData';
 import { getFileDatas } from '@/lib/filesHandler';
-import type { FileInfoType } from '@/types/index';
+import type { FileInfoType, GeneratedType } from '@/types/index';
 import { getDynaImageFromFiles } from '@/lib/apiCalls';
+import { usePlays } from '../output';
 
 const InputContext = createContext<IInputContext>({
 	fileControl: {
@@ -30,6 +31,7 @@ const InputContext = createContext<IInputContext>({
 export function InputProvider({ children }: IInputProviderProps) {
 	// TODO: Add Debounced State here
 	const [fileInfos, setFileInfos] = useState<FileInfoType[]>([]);
+	const { addPlays } = usePlays();
 	const [loading, setLoading] = useState(false);
 
 	const handleAdd = useCallback(async (files: FileList | null) => {
@@ -49,9 +51,11 @@ export function InputProvider({ children }: IInputProviderProps) {
 
 	const handleSubmit = async () => {
 		const formDataWithImagesOrUrls = getFormData(fileInfos);
-		await getDynaImageFromFiles(formDataWithImagesOrUrls).then(() => {
-			setLoading(false);
+		await getDynaImageFromFiles(formDataWithImagesOrUrls).then(({ dyna }) => {
+			// TODO: add a toast for error when dyna is undefined and success is false
+			addPlays(fileInfos, dyna as GeneratedType[]);
 			setFileInfos([]);
+			setLoading(false);
 		});
 	};
 

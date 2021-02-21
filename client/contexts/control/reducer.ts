@@ -1,25 +1,17 @@
-import type { Dispatch, ReactNode } from 'react';
+import type { PlayType } from '@/types/index';
+import { playSettings } from '@/utils/defaultSettings';
 
-export const initialValue: IState = {
-	imgSrc: '',
-	dimensions: 15,
-	blur: 1.5,
-	scale: 1.2,
-	format: 'css',
-	code: 'getting the output',
-};
+const initialValue: Required<IActionPayload> = playSettings;
 
-export function lazyInit(providedValue: IState): IState {
-	return { ...initialValue, ...providedValue };
-}
-
-export function reducer(state: IState, action: IAction): IState {
-	const { dimensions, scale, blur, format } = action.payload as Required<IActionPayload>;
+export function reducer(state: PlayType, action: IAction): PlayType {
+	const { height, width, scale, blur, format } = action.payload as Required<IActionPayload>;
 
 	console.log('the displathed is', action.payload);
 	switch (action.type) {
-		case 'CHANGE_DIMENSIONS':
-			return { ...state, dimensions };
+		case 'CHANGE_HEIGHT':
+			return { ...state, height };
+		case 'CHANGE_WIDTH':
+			return { ...state, width };
 		case 'CHANGE_SCALE':
 			return { ...state, scale };
 		case 'CHANGE_BLUR':
@@ -27,38 +19,25 @@ export function reducer(state: IState, action: IAction): IState {
 		case 'CHANGE_FORMAT':
 			return { ...state, format };
 		case 'RESET':
-			return lazyInit(initialValue);
+			return { ...state, ...initialValue };
 		default:
 			return state;
 	}
 }
 
-type ActionType = 'CHANGE_DIMENSIONS' | 'CHANGE_BLUR' | 'CHANGE_SCALE' | 'CHANGE_FORMAT' | 'RESET';
+type ActionType =
+	| 'CHANGE_HEIGHT'
+	| 'CHANGE_WIDTH'
+	| 'CHANGE_BLUR'
+	| 'CHANGE_SCALE'
+	| 'CHANGE_FORMAT'
+	| 'RESET';
 
-export type FormatType = 'css' | 'base64';
+// restricting payload to not change certain keys
+type IActionPayload = Omit<Partial<PlayType>, 'imgSrc' | 'code' | 'name' | 'file'>;
 
-type IActionPayload = Omit<Partial<IState>, 'imgSrc' | 'code'>;
-
-interface IAction {
+export interface IAction {
 	type: ActionType;
 	payload: IActionPayload;
 }
 
-export interface IState {
-	imgSrc: string;
-	dimensions: number;
-	blur: number;
-	scale: number;
-	format: FormatType;
-	code: string;
-}
-
-export interface IControlProviderProps {
-	providerValue: IState;
-	children: ReactNode;
-}
-
-export interface IControlContext {
-	controlState: IState;
-	dispatchControl: Dispatch<IAction>;
-}

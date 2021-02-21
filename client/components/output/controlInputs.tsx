@@ -15,7 +15,8 @@ import {
 	UseCounterProps as ChakraUseCounterProps,
 } from '@chakra-ui/react';
 
-import { useControl, FormatType } from '@/contexts/control';
+import { useControl } from '@/contexts/control';
+import type {FormatType} from '@/types/index'
 
 const FormatOptions: FormatType[] = ['css', 'base64'];
 
@@ -25,15 +26,15 @@ export default function Controls() {
 	return (
 		<Box>
 			<NumberField
-				label="Height, Width"
-				val={controlState.dimensions}
+				label="Height"
+				val={controlState.height}
 				onChange={(curVal) =>
 					dispatchControl({
-						type: 'CHANGE_DIMENSIONS',
-						payload: { dimensions: parseInt(curVal, 10) },
+						type: 'CHANGE_HEIGHT',
+						payload: { height: parseInt(curVal, 10) },
 					})
 				}
-				rightSideDisplay={`${controlState.dimensions * controlState.dimensions} px`}
+				rightSideDisplay={`${controlState.height * controlState.width} px`}
 				max={50}
 				min={5}
 				step={1}

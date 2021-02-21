@@ -9,7 +9,7 @@ export function InputImage({ src }: { src: string }) {
 }
 
 export function OutputImage() {
-	// needs refactoring for base64 and css codes
+	// TODO: needs refactoring for base64 and css codes
 	return (
 		<Box h="450px">
 			<img src="https://source.unsplash.com/random" alt="output image" />

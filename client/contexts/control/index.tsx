@@ -1,17 +1,15 @@
-import { useReducer, createContext, useContext } from 'react';
+import { useReducer, createContext, useContext, Dispatch, ReactNode } from 'react';
 
-import { lazyInit, initialValue, reducer, IControlProviderProps, IControlContext } from './reducer';
+import { reducer, IAction } from './reducer';
+import { PlayType } from '@/types/index';
 
-// using context for the same state throughout the 4 components
 const ControlContext = createContext<IControlContext>({
-	controlState: initialValue,
+	controlState: {} as any,
 	dispatchControl: () => {},
 });
 
-export function ControlProvider({ providerValue, children }: IControlProviderProps) {
-	const [controlState, dispatchControl] = useReducer(reducer, initialValue, () =>
-		lazyInit(providerValue)
-	);
+export function PlayControlProvider({ providerValue, children }: IControlProviderProps) {
+	const [controlState, dispatchControl] = useReducer(reducer, providerValue);
 
 	return (
 		<ControlContext.Provider value={{ controlState, dispatchControl }}>
@@ -24,8 +22,20 @@ export function useControl() {
 	return useContext(ControlContext);
 }
 
-export type IOutputPlayProps = Omit<IControlProviderProps, 'children'> & {
+export function usePlayControlValue() {
+	return useContext(ControlContext).controlState;
+}
+
+export type IPlayControlProps = Omit<IControlProviderProps, 'children'> & {
 	uniqueId: number | string;
 };
 
-export type { FormatType } from './reducer';
+export interface IControlProviderProps {
+	providerValue: PlayType;
+	children: ReactNode;
+}
+
+export interface IControlContext {
+	controlState: PlayType;
+	dispatchControl: Dispatch<IAction>;
+}
