@@ -1,13 +1,14 @@
 [tool.black]
 line-length = 88
-target-version = ['py37']
+target-version = ['py38']
 include = '\.pyi?$'
 exclude = '''
 (
   /(
     | \.git          # root of the project
-    | \.venv
+    | venv
     | \.env
+    | env
     | build
     | dist
   )/
