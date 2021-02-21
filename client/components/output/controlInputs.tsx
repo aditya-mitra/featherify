@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 
 import { useControl } from '@/contexts/control';
-import type {FormatType} from '@/types/index'
+import type { FormatType } from '@/types/index';
 
 const FormatOptions: FormatType[] = ['css', 'base64'];
 
@@ -34,7 +34,21 @@ export default function Controls() {
 						payload: { height: parseInt(curVal, 10) },
 					})
 				}
-				rightSideDisplay={`${controlState.height * controlState.width} px`}
+				rightSideDisplay="px"
+				max={50}
+				min={5}
+				step={1}
+			/>
+			<NumberField
+				label="Width"
+				val={controlState.width}
+				onChange={(curVal) =>
+					dispatchControl({
+						type: 'CHANGE_WIDTH',
+						payload: { width: parseInt(curVal, 10) },
+					})
+				}
+				rightSideDisplay="px"
 				max={50}
 				min={5}
 				step={1}

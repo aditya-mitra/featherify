@@ -11,7 +11,7 @@ function PlayWithOutput({ providerValue, uniqueId }: IPlayControlProps) {
 		<Box
 			px="8"
 			pt="10"
-			h="425px"
+			h="550px"
 			borderWidth="1px"
 			borderRadius="lg"
 			mx="4"
