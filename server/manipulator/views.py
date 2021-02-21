@@ -22,15 +22,26 @@ class ManipulatorView(APIView):
         if "images" not in request.data and "urls" not in request.data:
             raise ParseError(detail="Neither urls nor images were not provided")
 
+        # should be refactored into a serializer
+
         urls = (
-            "urls" in request.data
-            and type(request.data.get("urls")) == "list"
-            and request.data.get("urls")
+            type(request.data.get("urls")) == "list" and request.data.get("urls")
         ) or []
 
         image_files = (
             "images" in request.data and request.FILES.getlist("images")
         ) or []
+
+        # IMPORTANT: get the integer height and width in a serializer with the correct condition of < 30
+
+        # width = (
+        #     request.data.get("width") and int(request.data.get("width")) <= 30
+        # ) or 10
+        # height = (
+        #     request.data.get("height") and int(request.data.get("height")) <= 30
+        # ) or 10
+
+        # print(width, height)
 
         resp = []
 
@@ -39,7 +50,7 @@ class ManipulatorView(APIView):
             resp.append(css)
 
         for url in urls:
-            css = get_image_css_from_url(request.data.get("urls"))
+            css = get_image_css_from_url(urls)
             resp.append(css)
 
         return Response(data=resp)
