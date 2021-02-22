@@ -24,5 +24,5 @@ export type PlayType = {
 	blur: number;
 	scale: number;
 	format: FormatType;
-	code: string;
+	code: object;
 };

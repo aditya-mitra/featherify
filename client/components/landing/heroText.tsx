@@ -5,7 +5,7 @@ import { SiReadthedocs } from 'react-icons/si';
 export default function HeroText() {
 	return (
 		<Box mb={0}>
-			<Box as="section" pt={{ base: '5rem' }} pb={{ base: '5rem' }}>
+			<Box as="section" pt={{ base: '7rem' }} pb={{ base: '7rem' }}>
 				<Container>
 					<Box textAlign="center">
 						<Text
@@ -19,7 +19,7 @@ export default function HeroText() {
 							fontWeight="extrabold"
 							mb="16px"
 							lineHeight="1.2">
-							Dynamically Generate Image Placeholders
+							Featherify your Image
 						</Text>
 
 						<Text
@@ -28,7 +28,7 @@ export default function HeroText() {
 							opacity={0.7}
 							fontSize={{ base: 'lg', lg: 'xl' }}
 							mt="6">
-							<strong>DynaImage</strong> is a fast and fully customizable application
+							<strong>Featherify</strong> is a fast and fully customizable application
 							which allows you to dynamically generate a blurred image for your image.
 						</Text>
 

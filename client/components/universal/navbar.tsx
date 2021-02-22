@@ -26,9 +26,14 @@ export default function NavbarContent() {
 		<>
 			<Flex w="100%" my="2.5" h="100%" px="6" align="center" justify="space-between">
 				<Flex align="center">
-					<strong>
-						<h3>DynaImages</h3>
-					</strong>
+					<Link
+						href="/"
+						fontSize="2xl"
+						fontWeight="hairline"
+						_hover={{}}
+						fontFamily="monospace">
+						Featherify
+					</Link>
 				</Flex>
 
 				<Flex justify="flex-end" w="100%" maxW="824px" align="center" color="gray.400">
@@ -39,7 +44,8 @@ export default function NavbarContent() {
 						color="green"
 						href="https://github.com/aditya-mitra"
 						isExternal
-						aria-label="GitHub Repository Link">
+						aria-label="GitHub Repository Link"
+						ml="3">
 						<Icon as={SiGithub} w="5" h="5" />
 					</Link>
 					<ColorModeSwitch />

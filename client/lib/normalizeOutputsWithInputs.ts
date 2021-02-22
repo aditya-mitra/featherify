@@ -6,7 +6,7 @@ export default function normalize(inputs: FileInfoType[], outputs: GeneratedType
 
 	const normalizedPlays: PlayType[] = [];
 
-	let o = 0;
+	let o: number = 0;
 
 	for (const i in inputs) {
 		const input = inputs[i];
@@ -17,7 +17,7 @@ export default function normalize(inputs: FileInfoType[], outputs: GeneratedType
 				...playSettings,
 				imgSrc: input.imgSrc as string,
 				file: input.data as File,
-				code: JSON.stringify(output.styles),
+				code: output.styles,
 				name: input.name,
 			});
 			o++;
