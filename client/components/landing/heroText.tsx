@@ -1,68 +1,47 @@
-import { Box, Button, Container, Stack, Text } from '@chakra-ui/react';
-import { GiLightningHelix } from 'react-icons/gi';
-import { SiReadthedocs } from 'react-icons/si';
+import { Flex, Container, Heading, Stack, Text, Button } from '@chakra-ui/react';
 
-export default function HeroText() {
+export default function CallToActionWithIllustration() {
 	return (
-		<Box mb={0}>
-			<Box as="section" pt={{ base: '7rem' }} pb={{ base: '7rem' }}>
-				<Container>
-					<Box textAlign="center">
-						<Text
-							bgGradient="linear(to-l, #7928CA,#FF0080)"
-							bgClip="text"
-							maxW="16ch"
-							mx="auto"
-							fontSize={{ base: '2.25rem', sm: '3rem', lg: '4rem' }}
-							fontFamily="heading"
-							letterSpacing="tighter"
-							fontWeight="extrabold"
-							mb="16px"
-							lineHeight="1.2">
-							Featherify your Image
-						</Text>
-
-						<Text
-							maxW="560px"
-							mx="auto"
-							opacity={0.7}
-							fontSize={{ base: 'lg', lg: 'xl' }}
-							mt="6">
-							<strong>Featherify</strong> is a fast and fully customizable application
-							which allows you to dynamically generate a blurred image for your image.
-						</Text>
-
-						<Stack
-							mt="10"
-							spacing="4"
-							justify="center"
-							direction={{ base: 'column', sm: 'row' }}>
-							<Button
-								as="a"
-								href="/play"
-								h="4rem"
-								px="40px"
-								fontSize="1.2rem"
-								size="lg"
-								colorScheme="teal"
-								rightIcon={<GiLightningHelix fontSize="1.2em" />}>
-								Playground
-							</Button>
-							<Button
-								as="a"
-								href="/docs"
-								size="lg"
-								h="4rem"
-								px="40px"
-								fontSize="1.2rem"
-								colorScheme="orange"
-								rightIcon={<SiReadthedocs fontSize="1.1em" />}>
-								Documentation
-							</Button>
-						</Stack>
-					</Box>
-				</Container>
-			</Box>
-		</Box>
+		<Container maxW="5xl">
+			<Stack
+				textAlign="center"
+				align="center"
+				spacing={{ base: 8, md: 10 }}
+				py={{ base: 20, md: 28 }}>
+				<Heading
+					bgGradient="linear(to-l, #7928CA,#FF0080)"
+					bgClip="text"
+					maxW="16ch"
+					mx="auto"
+					fontSize={{ base: '2.25rem', sm: '3rem', lg: '4rem' }}
+					fontFamily="heading"
+					letterSpacing="tighter"
+					fontWeight="extrabold"
+					mb="16px"
+					lineHeight="1.2">
+					Featherify your Image
+				</Heading>
+				<Text fontSize={{ base: 'lg', lg: 'xl' }} opacity={0.7} maxW="2xl">
+					<strong>Featherify</strong> is a fast and fully customizable application which
+					allows you to dynamically generate a blurred image for your image.
+				</Text>
+				<Stack spacing={6} direction="row">
+					<Button
+						rounded={'full'}
+						px={6}
+						colorScheme="orange"
+						bg="orange.400"
+						_hover={{ bg: 'orange.500' }}>
+						PlayGround
+					</Button>
+					<Button rounded="full" px={6}>
+						Documentation
+					</Button>
+				</Stack>
+				<Flex w="full">
+					<h1>Illustration Image Pending</h1>
+				</Flex>
+			</Stack>
+		</Container>
 	);
 }
