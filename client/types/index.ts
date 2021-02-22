@@ -9,7 +9,8 @@ export type FileInfoType = {
 // TODO: Rename this variable
 export type GeneratedType = {
 	name: string;
-	styles: object;
+	styles?: object;
+	error?: object;
 };
 
 // TODO: just target these 2 formats for now until FULL completion
@@ -25,4 +26,10 @@ export type PlayType = {
 	scale: number;
 	format: FormatType;
 	code: object;
+};
+
+export type ErrorDisplayType = {
+	title: string;
+	description: string;
+	duration?: number;
 };

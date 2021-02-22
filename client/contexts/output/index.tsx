@@ -2,6 +2,7 @@ import { createContext, ReactNode, useState, useContext } from 'react';
 
 import { FileInfoType, GeneratedType, PlayType } from '@/types/index';
 import normalize from '@/lib/normalizeOutputsWithInputs';
+import createErrorToasts from '@/utils/errorToasts';
 
 export const OutputChamberContext = createContext<IOutputChamberContext>({
 	plays: [],
@@ -12,7 +13,9 @@ export function OutputChamberProvider({ children }: IOutputChamberProviderProps)
 	const [plays, setPlays] = useState<PlayType[]>([]);
 
 	const addPlays: addPlaysType = (ins, outs) => {
-		setPlays((prev) => prev.concat(normalize(ins, outs)));
+		const { normalizedPlays, errors } = normalize(ins, outs);
+		createErrorToasts(errors);
+		setPlays((prev) => prev.concat(normalizedPlays));
 	};
 
 	return (

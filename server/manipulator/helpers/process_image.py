@@ -9,7 +9,7 @@ def get_rows(pixels: List[Tuple], width: int) -> List[List[Tuple]]:
     return [pixels[x : x + width] for x in range(0, len(pixels), width)]
 
 
-def get_image_data(file_content: BytesIO, width=10, height=10) -> dict:
+def get_image_data(file_content: BytesIO, width=20, height=20) -> dict:
 
     im = Image.open(file_content)
     resized_image = im.resize((width, height))
