@@ -4,13 +4,13 @@ import { FileInfoType, GeneratedType, PlayType } from '@/types/index';
 import normalize from '@/lib/normalizeOutputsWithInputs';
 import { createErrorToasts, removeAPlayItem } from '@/utils/index';
 
-export const OutputChamberContext = createContext<IOutputChamberContext>({
+const PlayGroundChamberContext = createContext<IPlayGroundChamberContext>({
 	plays: [],
 	addPlays: () => {},
 	removePlay: () => {},
 });
 
-export function OutputChamberProvider({ children }: IOutputChamberProviderProps) {
+export function PlayGroundChamberProvider({ children }: IPlayGroundChamberProviderProps) {
 	const [plays, setPlays] = useState<PlayType[]>([]);
 
 	const addPlays: addPlaysType = (ins, outs) => {
@@ -25,23 +25,23 @@ export function OutputChamberProvider({ children }: IOutputChamberProviderProps)
 	};
 
 	return (
-		<OutputChamberContext.Provider value={{ plays, addPlays, removePlay }}>
+		<PlayGroundChamberContext.Provider value={{ plays, addPlays, removePlay }}>
 			{children}
-		</OutputChamberContext.Provider>
+		</PlayGroundChamberContext.Provider>
 	);
 }
 
 export function usePlays() {
-	return useContext(OutputChamberContext);
+	return useContext(PlayGroundChamberContext);
 }
 
 type addPlaysType = (ins: FileInfoType[], outs: GeneratedType[]) => void;
 
-interface IOutputChamberProviderProps {
+interface IPlayGroundChamberProviderProps {
 	children: ReactNode;
 }
 
-interface IOutputChamberContext {
+interface IPlayGroundChamberContext {
 	plays: PlayType[];
 	addPlays: addPlaysType;
 	removePlay: (uuid: string) => void;

@@ -1,15 +1,15 @@
 import InputChamber from '@/components/input';
-import OutputPlay from '@/components/play';
-import { OutputChamberProvider, usePlays } from '@/contexts/playground';
+import PlayWithOutput from '@/components/play';
+import { PlayGroundChamberProvider, usePlays } from '@/contexts/playground';
 import Layout from './layout';
 
 export default function Playground() {
 	return (
 		<Layout>
-			<OutputChamberProvider>
+			<PlayGroundChamberProvider>
 				<InputChamber />
 				<Plays />
-			</OutputChamberProvider>
+			</PlayGroundChamberProvider>
 		</Layout>
 	);
 }
@@ -18,7 +18,7 @@ function Plays() {
 	const { plays } = usePlays();
 
 	const displayPlays = plays.map((play) => (
-		<OutputPlay providerValue={play} key={play.uuid} uniqueId={play.uuid} />
+		<PlayWithOutput providerValue={play} key={play.uuid} uniqueId={play.uuid} />
 	));
 
 	return <>{displayPlays}</>;
