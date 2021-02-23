@@ -5,6 +5,7 @@ import { InputImage, OutputImage } from '@/components/output/images';
 import ControlInputs from '@/components/output/controlInputs';
 import CodeBlock from '@/components/output/codeBlock';
 import { PlayControlProvider, IPlayControlProps } from '@/contexts/control';
+import { usePlays } from '@/contexts/output';
 
 function PlayWithOutput({ providerValue, uniqueId }: IPlayControlProps) {
 	return (
@@ -37,12 +38,14 @@ function PlayWithOutput({ providerValue, uniqueId }: IPlayControlProps) {
 				</PlayControlProvider>
 				{/* End Provider */}
 			</Grid>
-			<RemoveItemButton id={uniqueId} />
+			<RemoveItemButton uuid={uniqueId} />
 		</Box>
 	);
 }
 
-function RemoveItemButton({ id }: { id: string | number }) {
+function RemoveItemButton({ uuid }: { uuid: string }) {
+	const { removePlay } = usePlays();
+
 	return (
 		<Tooltip label="Remove this item" hasArrow>
 			<CloseButton
@@ -53,7 +56,7 @@ function RemoveItemButton({ id }: { id: string | number }) {
 				backgroundColor="red.100"
 				_hover={{ bg: 'red.500' }}
 				_focus={{ bg: 'red.500' }}
-				onClick={() => console.log('removing ' + id)}
+				onClick={() => removePlay(uuid)}
 			/>
 		</Tooltip>
 	);

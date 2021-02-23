@@ -27,7 +27,7 @@ export function usePlayControlValue() {
 }
 
 export type IPlayControlProps = Omit<IControlProviderProps, 'children'> & {
-	uniqueId: number | string;
+	uniqueId: string;
 };
 
 export interface IControlProviderProps {

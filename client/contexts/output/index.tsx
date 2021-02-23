@@ -3,10 +3,12 @@ import { createContext, ReactNode, useState, useContext } from 'react';
 import { FileInfoType, GeneratedType, PlayType } from '@/types/index';
 import normalize from '@/lib/normalizeOutputsWithInputs';
 import createErrorToasts from '@/utils/errorToasts';
+import removeAPlayItem from '@/utils/removeAPlayItem';
 
 export const OutputChamberContext = createContext<IOutputChamberContext>({
 	plays: [],
 	addPlays: () => {},
+	removePlay: () => {},
 });
 
 export function OutputChamberProvider({ children }: IOutputChamberProviderProps) {
@@ -18,8 +20,13 @@ export function OutputChamberProvider({ children }: IOutputChamberProviderProps)
 		setPlays((prev) => prev.concat(normalizedPlays));
 	};
 
+	const removePlay = (uuid: string) => {
+		const newPlays = removeAPlayItem(plays, uuid);
+		setPlays(newPlays);
+	};
+
 	return (
-		<OutputChamberContext.Provider value={{ plays, addPlays }}>
+		<OutputChamberContext.Provider value={{ plays, addPlays, removePlay }}>
 			{children}
 		</OutputChamberContext.Provider>
 	);
@@ -38,4 +45,5 @@ interface IOutputChamberProviderProps {
 interface IOutputChamberContext {
 	plays: PlayType[];
 	addPlays: addPlaysType;
+	removePlay: (uuid: string) => void;
 }
