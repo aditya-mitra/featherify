@@ -1,3 +1,4 @@
+from uuid import uuid4
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -46,11 +47,13 @@ class ManipulatorView(APIView):
         resp = []
 
         for file_data in image_files:
-            css = get_image_css_from_file(file_data, width, height)
-            resp.append(css)
+            res = get_image_css_from_file(file_data, width, height)
+            res["uuid"] = uuid4()
+            resp.append(res)
 
         for url in urls:
-            css = get_image_css_from_url(urls, width, height)
-            resp.append(css)
+            res = get_image_css_from_url(urls, width, height)
+            res["uuid"] = uuid4()
+            resp.append(res)
 
         return Response(data=resp)
