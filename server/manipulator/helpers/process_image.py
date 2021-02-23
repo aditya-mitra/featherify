@@ -9,7 +9,7 @@ def get_rows(pixels: List[Tuple], width: int) -> List[List[Tuple]]:
     return [pixels[x : x + width] for x in range(0, len(pixels), width)]
 
 
-def get_image_data(file_content: BytesIO, width=20, height=20) -> dict:
+def get_image_data(file_content: BytesIO, width: int, height: int) -> dict:
 
     im = Image.open(file_content)
     resized_image = im.resize((width, height))
@@ -77,9 +77,9 @@ def get_image_position(gradients: List[AnyStr]) -> str:
     return ",".join(positions)
 
 
-def get_image_css(content: BytesIO) -> Dict[str, str]:
+def get_image_css(content: BytesIO, width: int, height: int) -> Dict[str, str]:
 
-    im_data = get_image_data(content)
+    im_data = get_image_data(content, width, height)
     im_rows = im_data.get("rows")
     im_gradient = get_linear_gradient(im_rows)
 
@@ -90,7 +90,9 @@ def get_image_css(content: BytesIO) -> Dict[str, str]:
     }
 
 
-def get_image_css_from_file(file_data: InMemoryUploadedFile) -> Dict[str, str]:
+def get_image_css_from_file(
+    file_data: InMemoryUploadedFile, width=15, height=15
+) -> Dict[str, str]:
     output = {"name": file_data.name}
 
     try:
@@ -101,13 +103,13 @@ def get_image_css_from_file(file_data: InMemoryUploadedFile) -> Dict[str, str]:
     return output
 
 
-def get_image_css_from_url(url: str) -> Dict[str, str]:
+def get_image_css_from_url(url: str, width=15, height=15) -> Dict[str, str]:
     output = {"name": url}
-    try:
 
+    try:
         response = requestget(url)
         image_bytes = BytesIO(response.content)
-        output["styles"] = get_image_css(image_bytes)
+        output["styles"] = get_image_css(image_bytes, width, height)
 
     except requestexecptions.RequestException as e:
         output["error"] = "request for the url - {}".format(e)

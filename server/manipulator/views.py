@@ -34,23 +34,23 @@ class ManipulatorView(APIView):
 
         # IMPORTANT: get the integer height and width in a serializer with the correct condition of < 30
 
-        # width = (
-        #     request.data.get("width") and int(request.data.get("width")) <= 30
-        # ) or 10
-        # height = (
-        #     request.data.get("height") and int(request.data.get("height")) <= 30
-        # ) or 10
+        width = (
+            request.data.get("width") and int(request.data.get("width")) <= 35
+        ) or 10
+        height = (
+            request.data.get("height") and int(request.data.get("height")) <= 35
+        ) or 10
 
-        # print(width, height)
+        print(width, height)
 
         resp = []
 
         for file_data in image_files:
-            css = get_image_css_from_file(file_data)
+            css = get_image_css_from_file(file_data, width, height)
             resp.append(css)
 
         for url in urls:
-            css = get_image_css_from_url(urls)
+            css = get_image_css_from_url(urls, width, height)
             resp.append(css)
 
         return Response(data=resp)
