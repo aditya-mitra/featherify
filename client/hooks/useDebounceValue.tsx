@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 
 /**
- * hook to return a value which updates its state after the `delay`
+ * hook to return a **delayed** value which for which the param `value` frequently changes
  * @param value the value for the hook
  * @param delay the milliseconds to delay
  */
-export default function useDebounceState<T>(value: T, delay: number) {
+export default function useDebounceValue<T>(value: T, delay: number) {
 	const [debouncedValue, setDebouncedValue] = useState(value);
 
 	useEffect(() => {

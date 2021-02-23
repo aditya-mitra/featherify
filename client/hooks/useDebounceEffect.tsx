@@ -11,13 +11,13 @@ export default function useDebouncedEffect(
 	deps: Array<any>,
 	delay: number
 ): void {
-	const timerRef = useRef<number>();
+	const timerRef = useRef<ReturnType<typeof setTimeout>>();
 
 	useEffect(() => {
-		clearTimeout(timerRef.current);
-		timerRef.current = setTimeout(fn, delay);
+		timerRef.current && clearTimeout(timerRef.current);
+		timerRef.current = setTimeout(() => fn(), delay);
 		return () => {
-			clearTimeout(timerRef.current);
+			timerRef.current && clearTimeout(timerRef.current);
 		};
-	}, [...deps, fn, delay]);
+	}, [...deps, delay]);
 }
