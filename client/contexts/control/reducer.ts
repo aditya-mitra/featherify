@@ -34,7 +34,7 @@ type ActionType =
 	| 'RESET';
 
 // restricting payload to not change certain keys
-type IActionPayload = Omit<Partial<PlayType>, 'imgSrc' | 'code' | 'name' | 'file'>;
+type IActionPayload = Omit<Partial<PlayType>, 'imgSrc' | 'code' | 'name' | 'file' | 'uuid'>;
 
 export interface IAction {
 	type: ActionType;

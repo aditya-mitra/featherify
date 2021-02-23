@@ -18,7 +18,7 @@ function Plays() {
 	const { plays } = usePlays();
 
 	const displayPlays = plays.map((play) => (
-		<OutputPlay providerValue={play} key={play.name} uniqueId={play.name} />
+		<OutputPlay providerValue={play} key={play.uuid} uniqueId={play.uuid} />
 	));
 
 	return <>{displayPlays}</>;

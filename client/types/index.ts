@@ -6,9 +6,9 @@ export type FileInfoType = {
 	data?: File;
 };
 
-// TODO: Rename this variable
 export type GeneratedType = {
 	name: string;
+	uuid: string;
 	styles?: object;
 	error?: object;
 };
@@ -18,6 +18,7 @@ export type FormatType = 'css' | 'base64';
 
 export type PlayType = {
 	name: string;
+	uuid: string;
 	file: File;
 	imgSrc: string;
 	width: number;

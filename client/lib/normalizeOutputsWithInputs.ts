@@ -22,7 +22,8 @@ export default function normalize(
 				imgSrc: input.imgSrc as string,
 				file: input.data as File,
 				code: output.styles,
-				name: `${input.name}-${output.name}`,
+				name: output.name,
+				uuid: output.uuid,
 			});
 			o++;
 		} else if (output.error || !output.styles) {

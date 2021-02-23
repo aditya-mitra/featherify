@@ -20,6 +20,7 @@ function PlayWithOutput({ providerValue, uniqueId }: IPlayControlProps) {
 			alignItems="center"
 			justifyContent="center">
 			<Grid templateColumns="repeat(auto-fit, minmax(200px,1fr))" gap={4} mt="3">
+				{/* Start The Provider is put here to prevent unnecessary rerendering */}
 				<PlayControlProvider providerValue={providerValue}>
 					<GridItem>
 						<ControlInputs />
@@ -34,6 +35,7 @@ function PlayWithOutput({ providerValue, uniqueId }: IPlayControlProps) {
 						<CodeBlock />
 					</GridItem>
 				</PlayControlProvider>
+				{/* End Provider */}
 			</Grid>
 			<RemoveItemButton id={uniqueId} />
 		</Box>
