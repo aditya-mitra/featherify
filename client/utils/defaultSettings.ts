@@ -6,4 +6,6 @@ export const playSettings = {
 	width: 10,
 	format: 'css' as FormatType,
 	scale: 1.1,
+	uuid: '',
+	code: {},
 };

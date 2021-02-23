@@ -17,11 +17,17 @@ export function PlayControlProvider({ providerValue, children }: IControlProvide
 	useDebouncedEffect(
 		() => {
 			const fileInfo = generateValidFileInfo(controlState.name, controlState.file);
-			getSingleFeatherFromFile(fileInfo).then(({ success, feather }) => {
-				if (success) {
-					console.log('new one', feather);
+
+			getSingleFeatherFromFile(fileInfo, controlState.height, controlState.width).then(
+				({ success, feather }) => {
+					if (success && feather?.uuid && feather?.styles) {
+						dispatchControl({
+							type: 'NEW_IMAGE_STYLES',
+							payload: { uuid: feather.uuid, code: feather.styles },
+						});
+					}
 				}
-			});
+			);
 		},
 		[controlState.height, controlState.width],
 		2 * 1000

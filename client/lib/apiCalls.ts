@@ -25,14 +25,18 @@ export async function getFeathersFromFiles(fileInfos: FileInfoType[]): Promise<I
 		.catch((error) => createError(error));
 }
 
-export async function getSingleFeatherFromFile(fileInfo: FileInfoType): Promise<ISingleResponse> {
-	const formdata = getFormData([fileInfo]);
+export async function getSingleFeatherFromFile(
+	fileInfo: FileInfoType,
+	height: number,
+	width: number
+): Promise<ISingleResponse> {
+	const formdata = getFormData([fileInfo], height, width);
 
 	return featherCall({
 		data: formdata,
 	})
 		.then((response) => response.data)
-		.then((data) => ({ success: true, feather: data }))
+		.then((data) => ({ success: true, feather: data[0] }))
 		.catch((error) => createError(error));
 }
 

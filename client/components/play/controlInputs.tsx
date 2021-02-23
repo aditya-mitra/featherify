@@ -35,7 +35,7 @@ export default function Controls() {
 					})
 				}
 				rightSideDisplay="px"
-				max={50}
+				max={100}
 				min={5}
 				step={1}
 			/>
@@ -49,7 +49,7 @@ export default function Controls() {
 					})
 				}
 				rightSideDisplay="px"
-				max={50}
+				max={100}
 				min={5}
 				step={1}
 			/>
