@@ -12,7 +12,7 @@ import { getFormData } from '@/lib/formData';
 import { getFileDatas } from '@/lib/filesHandler';
 import type { FileInfoType, GeneratedType } from '@/types/index';
 import { getDynaImageFromFiles } from '@/lib/apiCalls';
-import { usePlays } from '@/contexts/output';
+import { usePlays } from '@/contexts/playground';
 
 const InputContext = createContext<IInputContext>({
 	fileControl: {

@@ -15,7 +15,7 @@ import {
 	UseCounterProps as ChakraUseCounterProps,
 } from '@chakra-ui/react';
 
-import { useControl } from '@/contexts/control';
+import { useControl } from '@/contexts/play';
 import type { FormatType } from '@/types/index';
 
 const FormatOptions: FormatType[] = ['css', 'base64'];

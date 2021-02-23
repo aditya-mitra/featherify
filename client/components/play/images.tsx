@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Box } from '@chakra-ui/react';
 
-import { useControl } from '@/contexts/control';
+import { useControl } from '@/contexts/play';
 
 export function InputImage({ src }: { src: string }) {
 	return (

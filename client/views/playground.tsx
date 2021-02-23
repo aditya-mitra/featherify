@@ -1,6 +1,6 @@
 import InputChamber from '@/components/input';
-import OutputPlay from '@/components/output';
-import { OutputChamberProvider, usePlays } from '@/contexts/output';
+import OutputPlay from '@/components/play';
+import { OutputChamberProvider, usePlays } from '@/contexts/playground';
 import Layout from './layout';
 
 export default function Playground() {

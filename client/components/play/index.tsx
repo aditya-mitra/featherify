@@ -1,11 +1,11 @@
 import { memo } from 'react';
 import { Box, GridItem, Grid, Tooltip, CloseButton } from '@chakra-ui/react';
 
-import { InputImage, OutputImage } from '@/components/output/images';
-import ControlInputs from '@/components/output/controlInputs';
-import CodeBlock from '@/components/output/codeBlock';
-import { PlayControlProvider, IPlayControlProps } from '@/contexts/control';
-import { usePlays } from '@/contexts/output';
+import { InputImage, OutputImage } from '@/components/play/images';
+import ControlInputs from '@/components/play/controlInputs';
+import CodeBlock from '@/components/play/codeBlock';
+import { PlayControlProvider, IPlayControlProps } from '@/contexts/play';
+import { usePlays } from '@/contexts/playground';
 
 function PlayWithOutput({ providerValue, uniqueId }: IPlayControlProps) {
 	return (

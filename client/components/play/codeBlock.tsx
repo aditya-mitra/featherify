@@ -1,6 +1,6 @@
 import { Box, Button, ButtonProps, Code, useClipboard } from '@chakra-ui/react';
 
-import { useControl } from '@/contexts/control';
+import { useControl } from '@/contexts/play';
 
 // TODO : NEEDS Refactor (IMPORTANT)
 
