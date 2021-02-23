@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { GeneratedType } from '@/types/index';
+import createErrorToasts from '@/utils/errorToasts';
 
 const BASEURL =
 	process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api/manipulate' : 'amplify url';
@@ -18,7 +19,17 @@ export async function getDynaImageFromFiles(formdata: FormData): Promise<IRespon
 	})
 		.then((response) => response.data)
 		.then((data) => ({ success: true, dyna: data }))
-		.catch((error) => ({ success: false, error: JSON.stringify(error) }));
+		.catch((error) => {
+			const errorAsString = error.message || JSON.stringify(error);
+			createErrorToasts([
+				{
+					title: 'Problem when during request',
+					description: errorAsString,
+					duration: 3000,
+				},
+			]);
+			return { success: false, error: errorAsString };
+		});
 }
 
 interface IResponse {

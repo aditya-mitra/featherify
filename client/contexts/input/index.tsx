@@ -12,7 +12,7 @@ import { getFormData } from '@/lib/formData';
 import { getFileDatas } from '@/lib/filesHandler';
 import type { FileInfoType, GeneratedType } from '@/types/index';
 import { getDynaImageFromFiles } from '@/lib/apiCalls';
-import { usePlays } from '../output';
+import { usePlays } from '@/contexts/output';
 
 const InputContext = createContext<IInputContext>({
 	fileControl: {
@@ -51,10 +51,11 @@ export function InputProvider({ children }: IInputProviderProps) {
 
 	const handleSubmit = async () => {
 		const formDataWithImagesOrUrls = getFormData(fileInfos);
-		await getDynaImageFromFiles(formDataWithImagesOrUrls).then(({ dyna }) => {
-			// TODO: add a toast for error when dyna is undefined and success is false
-			addPlays(fileInfos, dyna as GeneratedType[]);
-			setFileInfos([]);
+		await getDynaImageFromFiles(formDataWithImagesOrUrls).then(({ dyna, success }) => {
+			if (success) {
+				addPlays(fileInfos, dyna as GeneratedType[]);
+				setFileInfos([]);
+			}
 			setLoading(false);
 		});
 	};
