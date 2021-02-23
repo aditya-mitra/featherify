@@ -37,10 +37,10 @@ class ManipulatorView(APIView):
 
         width = (
             request.data.get("width") and int(request.data.get("width")) <= 35
-        ) or 10
+        ) or 20
         height = (
             request.data.get("height") and int(request.data.get("height")) <= 35
-        ) or 10
+        ) or 20
 
         print(width, height)
 

@@ -91,19 +91,19 @@ def get_image_css(content: BytesIO, width: int, height: int) -> Dict[str, str]:
 
 
 def get_image_css_from_file(
-    file_data: InMemoryUploadedFile, width=15, height=15
+    file_data: InMemoryUploadedFile, width: int, height: int
 ) -> Dict[str, str]:
     output = {"name": file_data.name}
 
     try:
-        output["styles"] = get_image_css(file_data.file)
+        output["styles"] = get_image_css(file_data.file, width, height)
     except:
         output["error"] = "problem processing file - {}".format(file_data.name)
 
     return output
 
 
-def get_image_css_from_url(url: str, width=15, height=15) -> Dict[str, str]:
+def get_image_css_from_url(url: str, width: int, height: int) -> Dict[str, str]:
     output = {"name": url}
 
     try:
