@@ -2,6 +2,9 @@ import { useReducer, createContext, useContext, Dispatch, ReactNode } from 'reac
 
 import { reducer, IAction } from './reducer';
 import { PlayType } from '@/types/index';
+import useDebouncedEffect from '@/hooks/useDebounceEffect';
+import { generateValidFileInfo } from '@/lib/filesHandler';
+import { getSingleFeatherFromFile } from '@/lib/apiCalls';
 
 const ControlContext = createContext<IControlContext>({
 	controlState: {} as any,
@@ -10,6 +13,19 @@ const ControlContext = createContext<IControlContext>({
 
 export function PlayControlProvider({ providerValue, children }: IControlProviderProps) {
 	const [controlState, dispatchControl] = useReducer(reducer, providerValue);
+
+	useDebouncedEffect(
+		() => {
+			const fileInfo = generateValidFileInfo(controlState.name, controlState.file);
+			getSingleFeatherFromFile(fileInfo).then(({ success, feather }) => {
+				if (success) {
+					console.log('new one', feather);
+				}
+			});
+		},
+		[controlState.height, controlState.width],
+		2 * 1000
+	);
 
 	return (
 		<ControlContext.Provider value={{ controlState, dispatchControl }}>

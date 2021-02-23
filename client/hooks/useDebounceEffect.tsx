@@ -1,22 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
- * hook to run an side effect after a `time`
+ * hook to run an side effect after a `delay`
  * @param fn callback function to run
  * @param deps dependencies passed in the `useEffect` deps
- * @param time the number of milliseconds after which the callback will run
+ * @param delay the number of milliseconds after which the callback will run
  */
 export default function useDebouncedEffect(
 	fn: CallableFunction,
 	deps: Array<any>,
-	time: number
+	delay: number
 ): void {
-	const dependencies = [...deps, fn, time];
+	const timerRef = useRef<number>();
 
 	useEffect(() => {
-		const timeout = setTimeout(fn, time);
+		clearTimeout(timerRef.current);
+		timerRef.current = setTimeout(fn, delay);
 		return () => {
-			clearTimeout(timeout);
+			clearTimeout(timerRef.current);
 		};
-	}, dependencies);
+	}, [...deps, fn, delay]);
 }

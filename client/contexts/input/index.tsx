@@ -8,7 +8,6 @@ import {
 	useState,
 } from 'react';
 
-import { getFormData } from '@/lib/formData';
 import { getFileDatas } from '@/lib/filesHandler';
 import type { FileInfoType, GeneratedType } from '@/types/index';
 import { getFeathersFromFiles } from '@/lib/apiCalls';
@@ -29,7 +28,6 @@ const InputContext = createContext<IInputContext>({
 });
 
 export function InputProvider({ children }: IInputProviderProps) {
-	// TODO: Add Debounced State here
 	const [fileInfos, setFileInfos] = useState<FileInfoType[]>([]);
 	const { addPlays } = usePlays();
 	const [loading, setLoading] = useState(false);
@@ -50,10 +48,9 @@ export function InputProvider({ children }: IInputProviderProps) {
 	);
 
 	const handleSubmit = async () => {
-		const formDataWithImagesOrUrls = getFormData(fileInfos);
-		await getFeathersFromFiles(formDataWithImagesOrUrls).then(({ feather, success }) => {
+		await getFeathersFromFiles(fileInfos).then(({ feathers, success }) => {
 			if (success) {
-				addPlays(fileInfos, feather as GeneratedType[]);
+				addPlays(fileInfos, feathers as GeneratedType[]);
 				setFileInfos([]);
 			}
 			setLoading(false);

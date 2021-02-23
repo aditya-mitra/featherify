@@ -1,5 +1,15 @@
 import type { FileInfoType } from '@/types/index';
 
+/**
+ * generate a valid **fileInfo** for already valid file
+ * useful request the same file to the server
+ * @param name name of the file
+ * @param file the file data
+ */
+export function generateValidFileInfo(name: string, file: File): FileInfoType {
+	return { valid: true, data: file, name };
+}
+
 export async function getFileDatas(files: FileList) {
 	const fileInfos: FileInfoType[] = [];
 
