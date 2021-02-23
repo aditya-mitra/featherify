@@ -36,10 +36,14 @@ class ManipulatorView(APIView):
         # IMPORTANT: get the integer height and width in a serializer with the correct condition of < 30
 
         width = (
-            request.data.get("width") and int(request.data.get("width")) <= 35
+            request.data.get("width")
+            and int(request.data.get("width")) <= 100
+            and int(request.data.get("width"))
         ) or 20
         height = (
-            request.data.get("height") and int(request.data.get("height")) <= 35
+            request.data.get("height")
+            and int(request.data.get("height")) <= 100
+            and int(request.data.get("height"))
         ) or 20
 
         print(width, height)
