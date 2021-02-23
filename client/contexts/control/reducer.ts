@@ -1,7 +1,7 @@
 import type { PlayType } from '@/types/index';
-import { playSettings } from '@/utils/defaultSettings';
+import { defaultSettings } from '@/utils/index';
 
-const initialValue: Required<IActionPayload> = playSettings;
+const initialValue: Required<IActionPayload> = defaultSettings.playSettings;
 
 export function reducer(state: PlayType, action: IAction): PlayType {
 	const { height, width, scale, blur, format } = action.payload as Required<IActionPayload>;

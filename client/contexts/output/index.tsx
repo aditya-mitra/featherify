@@ -2,8 +2,7 @@ import { createContext, ReactNode, useState, useContext } from 'react';
 
 import { FileInfoType, GeneratedType, PlayType } from '@/types/index';
 import normalize from '@/lib/normalizeOutputsWithInputs';
-import createErrorToasts from '@/utils/errorToasts';
-import removeAPlayItem from '@/utils/removeAPlayItem';
+import { createErrorToasts, removeAPlayItem } from '@/utils/index';
 
 export const OutputChamberContext = createContext<IOutputChamberContext>({
 	plays: [],

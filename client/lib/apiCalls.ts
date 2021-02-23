@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { GeneratedType } from '@/types/index';
-import createErrorToasts from '@/utils/errorToasts';
+import { createErrorToasts } from '@/utils/index';
 
 const BASEURL =
 	process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api/manipulate' : 'amplify url';

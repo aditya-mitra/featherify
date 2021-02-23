@@ -1,5 +1,5 @@
 import { ErrorDisplayType, FileInfoType, GeneratedType, PlayType } from '@/types/index';
-import { playSettings } from '@/utils/defaultSettings';
+import { defaultSettings } from '@/utils/index';
 
 export default function normalize(
 	inputs: FileInfoType[],
@@ -18,7 +18,7 @@ export default function normalize(
 
 		if (input.valid && output.styles) {
 			normalizedPlays.push({
-				...playSettings,
+				...defaultSettings.playSettings,
 				imgSrc: input.imgSrc as string,
 				file: input.data as File,
 				code: output.styles,
