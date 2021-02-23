@@ -1,4 +1,4 @@
-# dyna_image
+# Featherify
 Dynamically generate code for Image
 
 
