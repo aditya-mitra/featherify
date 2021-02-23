@@ -9,6 +9,7 @@ import {
 	Icon,
 	Image,
 	useColorModeValue,
+	Heading,
 } from '@chakra-ui/react';
 import { VscCheck, VscClose } from 'react-icons/vsc';
 import { MdError } from 'react-icons/md';
@@ -19,6 +20,8 @@ export default function DropZone() {
 
 	return (
 		<Box my="8">
+			{/* TODO: add gradient to these headings */}
+			<Heading textAlign="center">File Feathers</Heading>
 			<DropZoneCatcher>
 				{fileInfos.length > 0 ? <DropZoneTable /> : <DropZoneInitialText />}
 			</DropZoneCatcher>
