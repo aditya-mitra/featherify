@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
  * @param value the value for the hook
  * @param delay the milliseconds to delay
  */
-export default function useDebounce<T>(value: T, delay: number) {
+export default function useDebounceState<T>(value: T, delay: number) {
 	const [debouncedValue, setDebouncedValue] = useState(value);
 
 	useEffect(() => {
