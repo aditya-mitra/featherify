@@ -4,21 +4,21 @@ import { GeneratedType } from '@/types/index';
 import { createErrorToasts } from '@/utils/index';
 
 const BASEURL =
-	process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api/manipulate' : 'amplify url';
+	process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api/manipulate' : 'lambda url';
 
-const dyna = axios.create({
+const featherCall = axios.create({
 	baseURL: BASEURL,
 	timeout: 10 * 1000,
 	method: 'POST',
 	headers: { 'Content-Type': 'multipart/form-data' },
 });
 
-export async function getDynaImageFromFiles(formdata: FormData): Promise<IResponse> {
-	return dyna({
+export async function getFeathersFromFiles(formdata: FormData): Promise<IResponse> {
+	return featherCall({
 		data: formdata,
 	})
 		.then((response) => response.data)
-		.then((data) => ({ success: true, dyna: data }))
+		.then((data) => ({ success: true, feather: data }))
 		.catch((error) => {
 			const errorAsString = error.message || JSON.stringify(error);
 			createErrorToasts([
@@ -34,6 +34,6 @@ export async function getDynaImageFromFiles(formdata: FormData): Promise<IRespon
 
 interface IResponse {
 	success: boolean;
-	dyna?: Array<GeneratedType>;
+	feather?: Array<GeneratedType>;
 	error?: string;
 }

@@ -13,7 +13,7 @@ export default function BuiltUsing() {
 					<SimpleGrid columns={{ base: 1, md: 2 }} spacingX="10" spacingY="14">
 						<Feature title="Django" icon={<SiDjango />}>
 							Django and Django Rest Framework together support the backend of
-							DynaImages
+							Featherify
 						</Feature>
 						<Feature title="NextJS" icon={<SiNextDotJs />}>
 							NextJS is the React Framework we used for supporting our Playground and

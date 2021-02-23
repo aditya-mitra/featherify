@@ -11,7 +11,7 @@ import {
 import { getFormData } from '@/lib/formData';
 import { getFileDatas } from '@/lib/filesHandler';
 import type { FileInfoType, GeneratedType } from '@/types/index';
-import { getDynaImageFromFiles } from '@/lib/apiCalls';
+import { getFeathersFromFiles } from '@/lib/apiCalls';
 import { usePlays } from '@/contexts/playground';
 
 const InputContext = createContext<IInputContext>({
@@ -51,9 +51,9 @@ export function InputProvider({ children }: IInputProviderProps) {
 
 	const handleSubmit = async () => {
 		const formDataWithImagesOrUrls = getFormData(fileInfos);
-		await getDynaImageFromFiles(formDataWithImagesOrUrls).then(({ dyna, success }) => {
+		await getFeathersFromFiles(formDataWithImagesOrUrls).then(({ feather, success }) => {
 			if (success) {
-				addPlays(fileInfos, dyna as GeneratedType[]);
+				addPlays(fileInfos, feather as GeneratedType[]);
 				setFileInfos([]);
 			}
 			setLoading(false);
