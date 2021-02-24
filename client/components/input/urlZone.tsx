@@ -24,10 +24,14 @@ export default function UrlZone() {
 		setUrlsCount((p) => p + 1);
 	}, [setUrlsCount]);
 
-	const removeAUrl = useCallback(() => {
-		// setUrlsCount((prev) => prev.slice(0, prev.length - 1));
-		console.log('TODO: delete method');
-	}, []);
+	const removeAUrl = useCallback(
+		(idx: number) => {
+			if (urlRefs.current.length === 1) return;
+			urlRefs.current.splice(idx, 1);
+			setUrlsCount((prev) => prev - 1);
+		},
+		[urlRefs, setUrlsCount]
+	);
 
 	const handleSubmit = useCallback(() => {
 		setLoading(true);
@@ -63,7 +67,7 @@ export default function UrlZone() {
 								size="md"
 								ref={(r) => r && (urlRefs.current[i] = r)}
 								onKeyDown={(e) => handleKeyDown(e, addAnotherUrl)}
-								onChange={(e) => handleOnChange(e, removeAUrl)}
+								onChange={(e) => handleOnChange(e, removeAUrl, i)}
 							/>
 						))}
 				</Stack>
@@ -95,9 +99,13 @@ function handleKeyDown(event: KeyboardEvent<HTMLInputElement>, addAnotherUrl: Ca
 	}
 }
 
-function handleOnChange(event: ChangeEvent<HTMLInputElement>, removeUrl: CallableFunction) {
+function handleOnChange(
+	event: ChangeEvent<HTMLInputElement>,
+	removeUrl: CallableFunction,
+	idx: number
+) {
 	if (event.target.value === '') {
-		removeUrl();
+		removeUrl(idx);
 	}
 }
 
