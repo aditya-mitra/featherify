@@ -1,8 +1,11 @@
 import { createContext, ReactNode, useState, useContext } from 'react';
 
-import { FileInfoType, GeneratedType, PlayType } from '@/types/index';
-import normalize from '@/lib/normalizeOutputsWithInputs';
-import { createErrorToasts, removeAPlayItem } from '@/utils/index';
+import {
+	createErrorToasts,
+	removeAPlayItem,
+	normalizeOutputsWithInputs as normalize,
+} from '@/utils/index';
+import type { FileInfoType, GeneratedType, PlayType } from '@/types/index';
 
 const PlayGroundChamberContext = createContext<IPlayGroundChamberContext>({
 	plays: [],

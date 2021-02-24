@@ -1,5 +1,5 @@
 import { KeyboardEvent, ChangeEvent, useEffect } from 'react';
-import { Box, Heading, Input, Stack } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Input, Stack } from '@chakra-ui/react';
 
 import { useInputUrls } from '@/contexts/input';
 
@@ -17,18 +17,30 @@ export default function UrlZone() {
 			<Heading textAlign="center" my="4">
 				URL Feathers
 			</Heading>
-			<Stack>
-				{urlRefs.map((_, i) => (
-					<Input
-						key={i}
-						placeholder={placeholderText}
-						size="md"
-						ref={urlRefs[i]}
-						onKeyDown={(e) => handleKeyDown(e, addAnotherUrl)}
-						onChange={(e) => handleChange(e, removeAUrl, i)}
-					/>
-				))}
-			</Stack>
+			<Flex alignItems="center" flexDirection="column">
+				<Stack w="full">
+					{urlRefs.map((_, i) => (
+						<Input
+							key={i}
+							placeholder={placeholderText}
+							size="md"
+							ref={urlRefs[i]}
+							onKeyDown={(e) => handleKeyDown(e, addAnotherUrl)}
+							onChange={(e) => handleOnChange(e, removeAUrl, i)}
+						/>
+					))}
+				</Stack>
+
+				<Button
+					d="block"
+					colorScheme="twitter"
+					mt="2.5"
+					width="35%"
+					alignContent="center"
+					justifyContent="center">
+					Submit URLs
+				</Button>
+			</Flex>
 		</Box>
 	);
 }
@@ -39,7 +51,7 @@ function handleKeyDown(event: KeyboardEvent<HTMLInputElement>, addAnotherUrl: Ca
 	}
 }
 
-function handleChange(
+function handleOnChange(
 	event: ChangeEvent<HTMLInputElement>,
 	removeUrl: (i: number) => void,
 	i: number

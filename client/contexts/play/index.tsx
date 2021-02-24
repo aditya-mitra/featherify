@@ -19,11 +19,11 @@ export function PlayControlProvider({ providerValue, children }: IControlProvide
 			const fileInfo = generateValidFileInfo(controlState.name, controlState.file);
 
 			getSingleFeatherFromFile(fileInfo, controlState.height, controlState.width).then(
-				({ success, feather }) => {
-					if (success && feather?.uuid && feather?.styles) {
+				({ success, feathers }) => {
+					if (success && Array.isArray(feathers)) {
 						dispatchControl({
 							type: 'NEW_IMAGE_STYLES',
-							payload: { uuid: feather.uuid, code: feather.styles },
+							payload: { uuid: feathers[0].uuid, code: feathers[0].styles },
 						});
 					}
 				}

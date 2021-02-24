@@ -69,7 +69,7 @@ export function InputProvider({ children }: IInputProviderProps) {
 			}
 			setLoading(false);
 		});
-	}, [addPlays, setFileInfos, setLoading, getFeathersFromFiles]);
+	}, [addPlays, fileInfos, setFileInfos, setLoading, getFeathersFromFiles]);
 
 	const addAnotherUrl = useCallback(() => {
 		setUrlArrayLength((p) => p + 1);
