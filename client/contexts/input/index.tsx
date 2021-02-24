@@ -1,9 +1,7 @@
 import {
 	createContext,
-	createRef,
 	Dispatch,
 	ReactNode,
-	RefObject,
 	SetStateAction,
 	useCallback,
 	useContext,
@@ -11,11 +9,10 @@ import {
 	useState,
 } from 'react';
 
-import { getFileDatas } from '@/lib/filesHandler';
-import type { FileInfoType, GeneratedType } from '@/types/index';
-import { getFeathersFromFiles } from '@/lib/apiCalls';
 import { usePlays } from '@/contexts/playground';
-import useDebouncedState from '@/hooks/useDebouncedState';
+import { getFileDatas } from '@/lib/filesHandler';
+import { getFeathersFromFiles, getFeathersFromURLs } from '@/lib/apiCalls';
+import type { FileInfoType, GeneratedType } from '@/types/index';
 
 const InputContext = createContext<IInputContext>({
 	fileControl: {
@@ -30,9 +27,9 @@ const InputContext = createContext<IInputContext>({
 		setLoading: () => {},
 	},
 	urlControl: {
-		urlRefs: [],
-		addAnotherUrl: () => {},
-		removeAUrl: () => {},
+		urlsCount: 1,
+		submitURLs: () => {},
+		setUrlsCount: () => {},
 	},
 });
 
@@ -41,8 +38,7 @@ export function InputProvider({ children }: IInputProviderProps) {
 
 	const [fileInfos, setFileInfos] = useState<FileInfoType[]>([]);
 
-	const [urlArrayLength, setUrlArrayLength] = useState(1);
-	const [urlRefs, setUrlRefs] = useDebouncedState<RefObject<HTMLInputElement>[]>([], 25);
+	const [urlsCount, setUrlsCount] = useState<number>(1);
 
 	const [loading, setLoading] = useState(false);
 
@@ -71,24 +67,17 @@ export function InputProvider({ children }: IInputProviderProps) {
 		});
 	}, [addPlays, fileInfos, setFileInfos, setLoading, getFeathersFromFiles]);
 
-	const addAnotherUrl = useCallback(() => {
-		setUrlArrayLength((p) => p + 1);
-		setUrlRefs((prev) =>
-			Array(urlArrayLength)
-				.fill(null)
-				.map((_, i) => prev[i] || createRef())
-		);
-	}, [urlArrayLength, setUrlRefs, setUrlArrayLength]);
-
-	const removeAUrl = useCallback(
-		(i: number) => {
-			if (urlArrayLength === 1) return;
-			setUrlArrayLength((p) => p - 1);
-			const newArr = [...urlRefs];
-			newArr.splice(i, 1);
-			setUrlRefs(newArr);
+	const submitURLs = useCallback(
+		async (urls: string[]) => {
+			await getFeathersFromURLs(urls).then(({ success, feathers }) => {
+				if (success) {
+					addPlays(urls, feathers as GeneratedType[]);
+					setUrlsCount(1);
+				}
+				setLoading(false);
+			});
 		},
-		[urlArrayLength, setUrlArrayLength, urlRefs, setUrlRefs]
+		[urlsCount, setUrlsCount]
 	);
 
 	const fileControl = useMemo(
@@ -96,10 +85,10 @@ export function InputProvider({ children }: IInputProviderProps) {
 		[fileInfos, setFileInfos, handleAdd, handleRemove, handleSubmit]
 	);
 	const loadingControl = useMemo(() => ({ loading, setLoading }), [loading, setLoading]);
-	const urlControl = useMemo(() => ({ urlRefs, addAnotherUrl, removeAUrl }), [
-		urlRefs,
-		addAnotherUrl,
-		removeAUrl,
+	const urlControl = useMemo(() => ({ urlsCount, setUrlsCount, submitURLs }), [
+		urlsCount,
+		setUrlsCount,
+		submitURLs,
 	]);
 
 	return (
@@ -134,9 +123,9 @@ interface IInputContext {
 		setLoading: Dispatch<SetStateAction<boolean>>;
 	};
 	urlControl: {
-		urlRefs: RefObject<HTMLInputElement>[];
-		addAnotherUrl: () => void;
-		removeAUrl: (i: number) => void;
+		urlsCount: number;
+		setUrlsCount: Dispatch<SetStateAction<number>>;
+		submitURLs: (urls: string[]) => void;
 	};
 }
 

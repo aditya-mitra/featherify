@@ -25,9 +25,7 @@ class ManipulatorView(APIView):
 
         # should be refactored into a serializer
 
-        urls = (
-            type(request.data.get("urls")) == "list" and request.data.get("urls")
-        ) or []
+        urls = ("urls" in request.data and request.data.getlist("urls")) or []
 
         image_files = (
             "images" in request.data and request.FILES.getlist("images")
@@ -56,7 +54,7 @@ class ManipulatorView(APIView):
             resp.append(res)
 
         for url in urls:
-            res = get_image_css_from_url(urls, width, height)
+            res = get_image_css_from_url(url, width, height)
             res["uuid"] = uuid4()
             resp.append(res)
 

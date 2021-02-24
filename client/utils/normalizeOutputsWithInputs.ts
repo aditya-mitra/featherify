@@ -1,10 +1,55 @@
 import type { ErrorDisplayType, FileInfoType, GeneratedType, PlayType } from '@/types/index';
-import { playSettings } from '@/utils/defaultSettings';
+import { defaultSettings, createErrorToasts } from '@/utils/index';
 
 export default function normalize(
-	inputs: FileInfoType[],
+	inputs: FileInfoType[] | string[],
 	outputs: GeneratedType[]
 ): INormalizeReturn {
+	if (inputs.length === 0 || outputs.length === 0) {
+		return { normalizedPlays: [], errors: [] };
+	} else if (!inputs.some((inp: any) => typeof inp !== 'string')) {
+		return normalizeURLs(inputs as string[], outputs);
+	} else {
+		return normalizeFiles(inputs as FileInfoType[], outputs);
+	}
+}
+
+function normalizeURLs(inputs: string[], outputs: GeneratedType[]): INormalizeReturn {
+	const normalizedPlays: PlayType[] = [];
+	const errors: ErrorDisplayType[] = [];
+
+	let o: number = 0;
+
+	for (const i in inputs) {
+		const input = inputs[i];
+		const output = outputs[o];
+
+		if (!output.error && output.styles) {
+			normalizedPlays.push({
+				...defaultSettings.playSettings,
+				imgSrc: input,
+				code: output.styles,
+				uuid: output.uuid,
+				name: output.name,
+			});
+			o++;
+		} else if (output.error || !output.styles) {
+			errors.push({
+				title: input,
+				description: output.error
+					? JSON.stringify(output.error)
+					: `Could not get the Feather for ${input}`,
+			});
+			o++;
+		}
+	}
+
+	createErrorToasts(errors);
+
+	return { normalizedPlays, errors };
+}
+
+function normalizeFiles(inputs: FileInfoType[], outputs: GeneratedType[]): INormalizeReturn {
 	// for each valid input we are expecting an output
 
 	const normalizedPlays: PlayType[] = [];
@@ -18,7 +63,7 @@ export default function normalize(
 
 		if (input.valid && output.styles) {
 			normalizedPlays.push({
-				...playSettings,
+				...defaultSettings.playSettings,
 				imgSrc: input.imgSrc as string,
 				file: input.data as File,
 				code: output.styles,
@@ -36,7 +81,6 @@ export default function normalize(
 			o++;
 		}
 	}
-
 	return { normalizedPlays, errors };
 }
 

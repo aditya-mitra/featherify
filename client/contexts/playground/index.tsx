@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useState, useContext } from 'react';
 
 import {
-	createErrorToasts,
 	removeAPlayItem,
 	normalizeOutputsWithInputs as normalize,
 } from '@/utils/index';
@@ -17,8 +16,7 @@ export function PlayGroundChamberProvider({ children }: IPlayGroundChamberProvid
 	const [plays, setPlays] = useState<PlayType[]>([]);
 
 	const addPlays: addPlaysType = (ins, outs) => {
-		const { normalizedPlays, errors } = normalize(ins, outs);
-		createErrorToasts(errors);
+		const { normalizedPlays } = normalize(ins, outs);
 		setPlays((prev) => prev.concat(normalizedPlays));
 	};
 
@@ -38,7 +36,7 @@ export function usePlays() {
 	return useContext(PlayGroundChamberContext);
 }
 
-type addPlaysType = (ins: FileInfoType[], outs: GeneratedType[]) => void;
+type addPlaysType = (ins: FileInfoType[]|string[], outs: GeneratedType[]) => void;
 
 interface IPlayGroundChamberProviderProps {
 	children: ReactNode;

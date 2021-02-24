@@ -9,11 +9,11 @@ export function generateFormDataForFiles(
 	for (const file of files) {
 		if (file.valid) {
 			fileFormData.append('images', file.data as File);
-			if (height && width) {
-				fileFormData.append('height', height.toString());
-				fileFormData.append('width', width.toString());
-			}
 		}
+	}
+	if (height && width) {
+		fileFormData.append('height', height.toString());
+		fileFormData.append('width', width.toString());
 	}
 	return fileFormData;
 }
@@ -22,10 +22,10 @@ export function generateFormDataForURLs(urls: string[], height?: number, width?:
 	const urlFormData = new FormData();
 	for (const url of urls) {
 		urlFormData.append('urls', url);
-		if (height && width) {
-			urlFormData.append('height', height.toString());
-			urlFormData.append('width', width.toString());
-		}
+	}
+	if (height && width) {
+		urlFormData.append('height', height.toString());
+		urlFormData.append('width', width.toString());
 	}
 	return urlFormData;
 }

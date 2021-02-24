@@ -14,24 +14,25 @@ const ControlContext = createContext<IControlContext>({
 export function PlayControlProvider({ providerValue, children }: IControlProviderProps) {
 	const [controlState, dispatchControl] = useReducer(reducer, providerValue);
 
-	useDebouncedEffect(
-		() => {
-			const fileInfo = generateValidFileInfo(controlState.name, controlState.file);
+	// useDebouncedEffect(
+	// 	() => {
+	// 		// IMPORTANT TODO: add option for url
+	// 		const fileInfo = generateValidFileInfo(controlState.name, controlState.file as File);
 
-			getSingleFeatherFromFile(fileInfo, controlState.height, controlState.width).then(
-				({ success, feathers }) => {
-					if (success && Array.isArray(feathers)) {
-						dispatchControl({
-							type: 'NEW_IMAGE_STYLES',
-							payload: { uuid: feathers[0].uuid, code: feathers[0].styles },
-						});
-					}
-				}
-			);
-		},
-		[controlState.height, controlState.width],
-		2 * 1000
-	);
+	// 		getSingleFeatherFromFile(fileInfo, controlState.height, controlState.width).then(
+	// 			({ success, feathers }) => {
+	// 				if (success && Array.isArray(feathers)) {
+	// 					dispatchControl({
+	// 						type: 'NEW_IMAGE_STYLES',
+	// 						payload: { uuid: feathers[0].uuid, code: feathers[0].styles },
+	// 					});
+	// 				}
+	// 			}
+	// 		);
+	// 	},
+	// 	[controlState.height, controlState.width],
+	// 	500
+	// );
 
 	return (
 		<ControlContext.Provider value={{ controlState, dispatchControl }}>
