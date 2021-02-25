@@ -1,11 +1,10 @@
-from uuid import uuid4
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.exceptions import ParseError
 
-from .helpers.get_feather_image import get_image_css_from_file, get_image_css_from_url
+from .helpers.get_feather_image import get_feather_images
 from .serializers import ManipulatorSerializer
 
 
@@ -31,16 +30,10 @@ class ManipulatorView(APIView):
         width = serializer.validated_data.get("width")
         height = serializer.validated_data.get("height")
 
-        resp = []
+        config = serializer.validated_data.get("config")
 
-        for file_data in image_files:
-            res = get_image_css_from_file(file_data, width, height)
-            res["uuid"] = uuid4()
-            resp.append(res)
+        results = get_feather_images(
+            files=image_files, urls=urls, width=width, height=height, config=config
+        )
 
-        for url in urls:
-            res = get_image_css_from_url(url, width, height)
-            res["uuid"] = uuid4()
-            resp.append(res)
-
-        return Response(data=resp)
+        return Response(data=results)
