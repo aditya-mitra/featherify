@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.exceptions import ParseError
 
-from .helpers.process_image import get_image_css_from_file, get_image_css_from_url
+from .helpers.get_feather_image import get_image_css_from_file, get_image_css_from_url
 from .serializers import ManipulatorSerializer
 
 
