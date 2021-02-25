@@ -6,6 +6,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.exceptions import ParseError
 
 from .helpers.process_image import get_image_css_from_file, get_image_css_from_url
+from .serializers import ManipulatorSerializer
 
 
 class ManipulatorView(APIView):
@@ -18,10 +19,10 @@ class ManipulatorView(APIView):
 
     def post(self, request, format=None):
 
-        print(request.data)
+        serializer = ManipulatorSerializer(data=request.data)
 
-        if "images" not in request.data and "urls" not in request.data:
-            raise ParseError(detail="Neither urls nor images were not provided")
+        serializer.is_valid(raise_exception=True)
+        print(serializer.validated_data)
 
         # should be refactored into a serializer
 
