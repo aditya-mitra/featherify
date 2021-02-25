@@ -1,16 +1,12 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.exceptions import ParseError
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .helpers.get_feather_image import get_feather_images
 from .serializers import ManipulatorSerializer
 
 
 class ManipulatorView(APIView):
-
-    # parser_classes = [MultiPartParser, FormParser]
 
     def get(self, request):
         custom_data = {"company": "mahindra", "car": "scorpio"}
@@ -21,7 +17,6 @@ class ManipulatorView(APIView):
         serializer = ManipulatorSerializer(data=request.data)
 
         serializer.is_valid(raise_exception=True)
-        # should be refactored into a serializer
 
         urls = serializer.validated_data.get("urls")
 
