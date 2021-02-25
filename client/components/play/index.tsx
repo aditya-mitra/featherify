@@ -11,8 +11,8 @@ function PlayWithOutput({ providerValue, uniqueId }: IPlayControlProps) {
 	return (
 		<Box
 			px="8"
-			pt="10"
-			h="550px"
+			py="8"
+			h="fit-inside"
 			borderWidth="1px"
 			borderRadius="lg"
 			mx="4"
@@ -20,16 +20,16 @@ function PlayWithOutput({ providerValue, uniqueId }: IPlayControlProps) {
 			d="flex"
 			alignItems="center"
 			justifyContent="center">
-			<Grid templateColumns="repeat(auto-fit, minmax(200px,1fr))" gap={4} mt="3">
+			<Grid templateColumns="repeat(auto-fit, minmax(200px,1fr))" gap={4}>
 				{/* Start The Provider is put here to prevent unnecessary rerendering */}
 				<PlayControlProvider providerValue={providerValue}>
 					<GridItem>
 						<ControlInputs />
 					</GridItem>
-					<GridItem>
+					<GridItem justifySelf="center" alignSelf="center">
 						<InputImage src={providerValue.imgSrc} />
 					</GridItem>
-					<GridItem>
+					<GridItem justifySelf="center" alignSelf="center">
 						<OutputImage />
 					</GridItem>
 					<GridItem>

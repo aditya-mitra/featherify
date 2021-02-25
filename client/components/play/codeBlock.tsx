@@ -1,22 +1,26 @@
+import { useMemo } from 'react';
 import { Box, Button, ButtonProps, Code, useClipboard } from '@chakra-ui/react';
 
 import { useControl } from '@/contexts/play';
-
-// TODO : NEEDS Refactor (IMPORTANT)
+import { defaultSettings } from '@/utils/index';
 
 export default function CodeBlock() {
 	const {
 		controlState: { code },
 	} = useControl();
 
-	const copyCode = JSON.stringify(code, null, 4).replace(/"([^"]+)":/g, '$1:');
+	const copyCode = useMemo(() => JSON.stringify(code, null, 4).replace(/"([^"]+)":/g, '$1:'), [
+		code,
+	]);
 
 	const { hasCopied, onCopy } = useClipboard(copyCode);
 
 	return (
-		<Box position="relative" zIndex="0" m="2" h="200px">
-			<Box padding="5" rounded="8px" my="8">
-				<Code p="4">{copyCode}</Code>
+		<Box position="relative" zIndex="0" mt="-3.5" mr="-3.5">
+			<Box p="4" rounded="8px">
+				<Code d="block" p="2" overflowY="scroll" h={defaultSettings.PLAY_CODE_STYLE_HEIGHT}>
+					{copyCode}
+				</Code>
 			</Box>
 			<CopyButton onClick={onCopy}>{hasCopied ? 'copied' : 'copy'}</CopyButton>
 		</Box>
