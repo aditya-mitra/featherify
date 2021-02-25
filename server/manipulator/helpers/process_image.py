@@ -1,7 +1,8 @@
+from base64 import b64decode, b64encode
 from io import BytesIO
 from typing import AnyStr, Dict, List, Tuple
 
-from PIL import Image
+from PIL import Image, ImageEnhance
 
 
 def __create_rows(pixels: List[Tuple], width: int) -> List[List[Tuple]]:
@@ -71,3 +72,26 @@ def get_image_css(content: BytesIO, width: int, height: int) -> Dict[str, str]:
         "backgroundPosition": _get_image_position(im_gradient),
         "backgroundSize": _get_image_size(im_gradient),
     }
+
+
+def get_image_base64(content: BytesIO, width: int, height: int) -> str:
+
+    im = Image.open(content)
+
+    img_format = im.format
+    resized_image = im.resize((width, height))
+
+    enhancer = ImageEnhance.Color(resized_image)
+    newimg = enhancer.enhance(2)
+
+    buffered = BytesIO()
+
+    newimg.save(buffered, format=img_format)
+
+    base64_data = b64encode(buffered.getvalue()).decode()
+
+    base64_url = "data:image/{img_format};base64,{base64_data}".format(
+        img_format=img_format, base64_data=base64_data
+    )
+
+    return base64_url
