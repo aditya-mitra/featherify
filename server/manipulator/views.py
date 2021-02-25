@@ -22,30 +22,14 @@ class ManipulatorView(APIView):
         serializer = ManipulatorSerializer(data=request.data)
 
         serializer.is_valid(raise_exception=True)
-        print(serializer.validated_data)
-
         # should be refactored into a serializer
 
-        urls = ("urls" in request.data and request.data.getlist("urls")) or []
+        urls = serializer.validated_data.get("urls")
 
-        image_files = (
-            "images" in request.data and request.FILES.getlist("images")
-        ) or []
+        image_files = serializer.validated_data.get("images")
 
-        # IMPORTANT: get the integer height and width in a serializer with the correct condition of < 30
-
-        width = (
-            request.data.get("width")
-            and int(request.data.get("width")) <= 100
-            and int(request.data.get("width"))
-        ) or 20
-        height = (
-            request.data.get("height")
-            and int(request.data.get("height")) <= 100
-            and int(request.data.get("height"))
-        ) or 20
-
-        print(width, height)
+        width = serializer.validated_data.get("width")
+        height = serializer.validated_data.get("height")
 
         resp = []
 

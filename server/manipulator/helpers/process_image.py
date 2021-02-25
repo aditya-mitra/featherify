@@ -93,12 +93,14 @@ def get_image_css(content: BytesIO, width: int, height: int) -> Dict[str, str]:
 def get_image_css_from_file(
     file_data: InMemoryUploadedFile, width: int, height: int
 ) -> Dict[str, str]:
-    output = {"name": file_data.name}
 
+    output = {}
     try:
+        output["name"] = file_data.name
         output["styles"] = get_image_css(file_data.file, width, height)
     except:
-        output["error"] = "problem processing file - {}".format(file_data.name)
+        file_name = ("name" in file_data and file_data.name) or file_data
+        output["error"] = "problem processing file - {}".format(file_name)
 
     return output
 

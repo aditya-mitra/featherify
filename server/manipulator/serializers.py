@@ -4,7 +4,7 @@ from .default_settings import CONFIGURATION, WIDTH, HEIGHT
 
 
 def configurationValidator(value):
-    if not (value == "base64" or value == "css"):
+    if value not in ["base64", "css"]:
         raise serializers.ValidationError(
             "The value for configuration should be either 'css' or 'base64'"
         )
@@ -20,7 +20,7 @@ def inRangeValidator(value):
 class ManipulatorSerializer(serializers.Serializer):
     images = serializers.ListField(default=[])
     urls = serializers.ListField(default=[])
-    configuration = serializers.CharField(
+    config = serializers.CharField(
         default=CONFIGURATION, validators=[configurationValidator]
     )
     width = serializers.IntegerField(default=WIDTH, validators=[inRangeValidator])
