@@ -24,7 +24,7 @@ export function generateFormDataForURLs(
 	urls: string[],
 	height: number = playSettings.height,
 	width: number = playSettings.width,
-	config: ConfigType = 'css'
+	config: ConfigType = 'base64'
 ): FormData {
 	const urlFormData = new FormData();
 

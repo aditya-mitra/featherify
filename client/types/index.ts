@@ -26,7 +26,7 @@ export type PlayType = {
 	blur: number;
 	scale: number;
 	config: ConfigType;
-	code: object;
+	code: object | string;
 };
 
 export type ErrorDisplayType = {

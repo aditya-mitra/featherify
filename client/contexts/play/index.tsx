@@ -33,6 +33,8 @@ export function PlayControlProvider({ providerValue, children }: IControlProvide
 		250
 	);
 
+	console.log('the code is now', controlState.code);
+
 	const changeControlWithServer: IChangeControlWithServer = useCallback(
 		(control) => {
 			dispatchControl(control);

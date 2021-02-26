@@ -2,16 +2,17 @@ import { useMemo } from 'react';
 import { Box, Button, ButtonProps, Code, useClipboard } from '@chakra-ui/react';
 
 import { useControl } from '@/contexts/play';
-import { defaultSettings } from '@/utils/index';
+import { defaultSettings, isBase64 } from '@/utils/index';
 
 export default function CodeBlock() {
 	const {
 		controlState: { code },
 	} = useControl();
 
-	const copyCode = useMemo(() => JSON.stringify(code, null, 4).replace(/"([^"]+)":/g, '$1:'), [
-		code,
-	]);
+	const copyCode = useMemo(
+		() => (isBase64(code) ? code : JSON.stringify(code, null, 4).replace(/"([^"]+)":/g, '$1:')),
+		[code]
+	);
 
 	const { hasCopied, onCopy } = useClipboard(copyCode);
 
