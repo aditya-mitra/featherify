@@ -3,7 +3,6 @@ import { generateFormDataForFiles } from '@/utils/index';
 import type { FileInfoType } from '@/types/index';
 
 export async function getFeathersFromFiles(fileInfos: FileInfoType[]): Promise<IResponse> {
-	console.log('the file infos are', fileInfos);
 	const formdata = generateFormDataForFiles(fileInfos);
 
 	return featherCall({

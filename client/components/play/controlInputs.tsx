@@ -80,7 +80,7 @@ export default function Controls() {
 				min={0.0}
 				step={0.05}
 			/>
-			<DropdownSelect
+			<DropdownSelect // change this to a double button like toggle - selected one is filled (buttongroup)
 				label="Format"
 				options={FormatOptions}
 				val={controlState.format}

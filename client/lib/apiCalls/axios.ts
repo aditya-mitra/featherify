@@ -13,12 +13,6 @@ export const featherCall = axios.create({
 	headers: { 'Content-Type': 'multipart/form-data' },
 });
 
-export interface IResponse {
-	success: boolean;
-	feathers?: Array<GeneratedType>;
-	error?: string;
-}
-
 export function createError(error: AxiosError) {
 	const errorAsString = error.response?.data?.detail || error.message || JSON.stringify(error);
 	createErrorToasts([
@@ -29,4 +23,9 @@ export function createError(error: AxiosError) {
 		},
 	]);
 	return { success: false, error: errorAsString };
+}
+export interface IResponse {
+	success: boolean;
+	feathers?: Array<GeneratedType>;
+	error?: string;
 }

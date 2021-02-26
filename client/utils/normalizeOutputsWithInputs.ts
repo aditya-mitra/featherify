@@ -24,13 +24,13 @@ function normalizeURLs(inputs: string[], outputs: GeneratedType[]): INormalizeRe
 		const input = inputs[i];
 		const output = outputs[o];
 
-		if (!output.error && output.styles) {
+		if (!output.error && output.uuid) {
 			normalizedPlays.push({
 				...defaultSettings.playSettings,
 				imgSrc: input,
-				code: output.styles,
+				code: (output.styles || output.base64) as any,
 				uuid: output.uuid,
-				name: output.name,
+				name: output.name as string,
 			});
 			o++;
 		} else if (output.error || !output.styles) {
@@ -61,13 +61,13 @@ function normalizeFiles(inputs: FileInfoType[], outputs: GeneratedType[]): INorm
 		const input = inputs[i];
 		const output = outputs[o];
 
-		if (input.valid && output.styles) {
+		if (input.valid && output.uuid) {
 			normalizedPlays.push({
 				...defaultSettings.playSettings,
 				imgSrc: input.imgSrc as string,
 				file: input.data as File,
-				code: output.styles,
-				name: output.name,
+				code: (output.styles || output.base64) as any,
+				name: output.name as string,
 				uuid: output.uuid,
 			});
 			o++;

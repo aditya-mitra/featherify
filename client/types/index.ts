@@ -7,10 +7,11 @@ export type FileInfoType = {
 };
 
 export type GeneratedType = {
-	name: string;
-	uuid: string;
+	name?: string;
+	uuid?: string;
 	styles?: object;
 	error?: object;
+	base64?: string;
 };
 
 // TODO: just target these 2 formats for now until FULL completion
