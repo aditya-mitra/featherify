@@ -1,31 +1,39 @@
-import type { FileInfoType } from '@/types/index';
+import type { ConfigType, FileInfoType } from '@/types/index';
+import { playSettings } from './defaultSettings';
 
 export function generateFormDataForFiles(
 	files: FileInfoType[],
-	height?: number,
-	width?: number
+	height: number = playSettings.height,
+	width: number = playSettings.width,
+	config: ConfigType = 'css'
 ): FormData {
 	const fileFormData = new FormData();
+
 	for (const file of files) {
 		if (file.valid) {
 			fileFormData.append('images', file.data as File);
 		}
 	}
-	if (height && width) {
-		fileFormData.append('height', height.toString());
-		fileFormData.append('width', width.toString());
-	}
+	fileFormData.append('height', height.toString());
+	fileFormData.append('width', width.toString());
+	fileFormData.append('config', config);
 	return fileFormData;
 }
 
-export function generateFormDataForURLs(urls: string[], height?: number, width?: number): FormData {
+export function generateFormDataForURLs(
+	urls: string[],
+	height: number = playSettings.height,
+	width: number = playSettings.width,
+	config: ConfigType = 'css'
+): FormData {
 	const urlFormData = new FormData();
+
 	for (const url of urls) {
 		urlFormData.append('urls', url);
 	}
-	if (height && width) {
-		urlFormData.append('height', height.toString());
-		urlFormData.append('width', width.toString());
-	}
+	urlFormData.append('height', height.toString());
+	urlFormData.append('width', width.toString());
+	urlFormData.append('config', config);
+
 	return urlFormData;
 }

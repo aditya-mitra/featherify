@@ -16,7 +16,6 @@ export function PlayControlProvider({ providerValue, children }: IControlProvide
 
 	const changeControlOnServerResponse = useDebouncedCallback(
 		() => {
-			console.log('server change');
 			getSingleFeather(
 				controlState.file ?? controlState.imgSrc,
 				controlState.height,
