@@ -32,7 +32,7 @@ export function OutputImage() {
 		const backgroundRepeat = isBase64(code) ? 'auto' : 'no-repeat';
 
 		return {
-			receivedStyles,
+			...receivedStyles,
 			filter: `blur(${blur}px)`,
 			transform: `scale(${scale})`,
 			height: defaultSettings.PLAY_IMAGE_STYLE_DIMENSION,

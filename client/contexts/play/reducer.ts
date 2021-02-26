@@ -6,7 +6,6 @@ const initialValue: Required<IActionPayload> = defaultSettings.playSettings;
 export function reducer(state: PlayType, action: IAction): PlayType {
 	const { height, width, scale, blur, config, code } = action.payload as Required<IActionPayload>;
 
-	console.log('the displathed is', action.payload);
 	switch (action.type) {
 		case 'CHANGE_HEIGHT':
 			return { ...state, height };

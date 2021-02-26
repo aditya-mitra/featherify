@@ -14,6 +14,7 @@ const ControlContext = createContext<IControlContext>({
 export function PlayControlProvider({ providerValue, children }: IControlProviderProps) {
 	const [controlState, dispatchControl] = useReducer(reducer, providerValue);
 
+	// TODO: the controlState contains the previous value and not the updated one
 	const changeControlOnServerResponse = useDebouncedCallback(
 		() => {
 			getSingleFeather(
@@ -24,23 +25,21 @@ export function PlayControlProvider({ providerValue, children }: IControlProvide
 				if (success && feathers) {
 					dispatchControl({
 						type: 'NEW_CODE',
-						payload: { code: (feathers[0].styles ?? feathers[0].base64) as any },
+						payload: { code: feathers[0].styles ?? feathers[0].base64 },
 					});
 				}
 			});
 		},
-		[controlState],
+		[dispatchControl, controlState],
 		250
 	);
-
-	console.log('the code is now', controlState.code);
 
 	const changeControlWithServer: IChangeControlWithServer = useCallback(
 		(control) => {
 			dispatchControl(control);
 			changeControlOnServerResponse();
 		},
-		[dispatchControl]
+		[dispatchControl, changeControlOnServerResponse]
 	);
 
 	return (

@@ -10,5 +10,5 @@ export default function useDebouncedCallback<T extends (...args: any[]) => any>(
 	return useCallback(() => {
 		timerRef.current && clearTimeout(timerRef.current);
 		timerRef.current = setTimeout(callback, delay);
-	}, [deps, delay]) as T;
+	}, [...deps, delay]) as T;
 }
