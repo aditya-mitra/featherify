@@ -1,16 +1,18 @@
 import { createError, featherCall, IResponse } from './axios';
 import { generateFormDataForFiles, generateFormDataForURLs } from '@/utils/index';
+import { generateValidFileInfo } from '@/lib/filesHandler';
 import type { FileInfoType } from '@/types/index';
 
 export default async function getSingleFeather(
-	data: FileInfoType | SVGFESpecularLightingElement,
+	data: File | string,
 	height: number,
 	width: number
 ): Promise<IResponse> {
 	if (typeof data === 'string') {
 		return getSingleFeatherFromURL(data as string, height, width);
 	} else {
-		return getSingleFeatherFromFile(data as FileInfoType, height, width);
+		const fileInfo = generateValidFileInfo('single file', data);
+		return getSingleFeatherFromFile(fileInfo, height, width);
 	}
 }
 

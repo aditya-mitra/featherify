@@ -41,7 +41,7 @@ export type ActionType =
 	| 'CHANGE_BLUR'
 	| 'CHANGE_SCALE'
 	| 'CHANGE_CONFIG'
-	| 'NEW_IMAGE_STYLES'
+	| 'NEW_CODE'
 	| 'RESET';
 
-export type ServerActionType = Pick<ActionType, 'CHANGE_CONFIG' | 'CHANGE_HEIGHT' | 'CHANGE_WIDTH'>;
+export type ServerActionType = 'CHANGE_CONFIG' | 'CHANGE_HEIGHT' | 'CHANGE_WIDTH';

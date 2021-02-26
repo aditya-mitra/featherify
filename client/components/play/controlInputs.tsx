@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode, useCallback } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 import {
 	Box,
 	Button,
@@ -19,7 +19,7 @@ import { useControl } from '@/contexts/play';
 import type { ConfigType } from '@/types/index';
 
 export default function Controls() {
-	const { controlState, dispatchControl } = useControl();
+	const { controlState, dispatchControl, changeControlWithServer } = useControl();
 
 	return (
 		<Box>
@@ -27,7 +27,7 @@ export default function Controls() {
 				label="Height"
 				val={controlState.height}
 				onChange={(curVal) =>
-					dispatchControl({
+					changeControlWithServer({
 						type: 'CHANGE_HEIGHT',
 						payload: { height: parseInt(curVal, 10) },
 					})
@@ -41,7 +41,7 @@ export default function Controls() {
 				label="Width"
 				val={controlState.width}
 				onChange={(curVal) =>
-					dispatchControl({
+					changeControlWithServer({
 						type: 'CHANGE_WIDTH',
 						payload: { width: parseInt(curVal, 10) },
 					})
@@ -174,5 +174,3 @@ interface IDropdownSelectProps {
 	onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 	val: string;
 }
-
-type serverControlType = 'HEIGHT' | 'WIDTH' | 'CONFIG';

@@ -4,15 +4,7 @@ import { defaultSettings } from '@/utils/index';
 const initialValue: Required<IActionPayload> = defaultSettings.playSettings;
 
 export function reducer(state: PlayType, action: IAction): PlayType {
-	const {
-		height,
-		width,
-		scale,
-		blur,
-		config,
-		code,
-		uuid,
-	} = action.payload as Required<IActionPayload>;
+	const { height, width, scale, blur, config, code } = action.payload as Required<IActionPayload>;
 
 	console.log('the displathed is', action.payload);
 	switch (action.type) {
@@ -26,8 +18,8 @@ export function reducer(state: PlayType, action: IAction): PlayType {
 			return { ...state, blur };
 		case 'CHANGE_CONFIG':
 			return { ...state, config };
-		case 'NEW_IMAGE_STYLES':
-			return { ...state, code, uuid };
+		case 'NEW_CODE':
+			return { ...state, code };
 		case 'RESET':
 			return { ...state, ...initialValue };
 		default:
@@ -36,8 +28,7 @@ export function reducer(state: PlayType, action: IAction): PlayType {
 }
 
 // restricting payload to not change certain keys
-type IActionPayload = Omit<Partial<PlayType>, 'imgSrc' | 'name' | 'file'>;
-
+export type IActionPayload = Omit<Partial<PlayType>, 'imgSrc' | 'name' | 'file' | 'uuid'>;
 export interface IAction {
 	type: ActionType;
 	payload: IActionPayload;
