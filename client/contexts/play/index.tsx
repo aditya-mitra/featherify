@@ -20,7 +20,8 @@ export function PlayControlProvider({ providerValue, children }: IControlProvide
 			getSingleFeather(
 				controlState.file ?? controlState.imgSrc,
 				controlState.height,
-				controlState.width
+				controlState.width,
+				controlState.config
 			).then(({ feathers, success }) => {
 				if (success && feathers) {
 					dispatchControl({

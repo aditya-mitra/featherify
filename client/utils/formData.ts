@@ -5,7 +5,7 @@ export function generateFormDataForFiles(
 	files: FileInfoType[],
 	height: number = playSettings.height,
 	width: number = playSettings.width,
-	config: ConfigType = 'css'
+	config: ConfigType = playSettings.config
 ): FormData {
 	const fileFormData = new FormData();
 
@@ -24,7 +24,7 @@ export function generateFormDataForURLs(
 	urls: string[],
 	height: number = playSettings.height,
 	width: number = playSettings.width,
-	config: ConfigType = 'base64'
+	config: ConfigType = playSettings.config
 ): FormData {
 	const urlFormData = new FormData();
 

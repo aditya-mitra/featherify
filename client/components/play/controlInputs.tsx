@@ -1,10 +1,11 @@
-import { ChangeEvent, ReactNode } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 import {
 	Box,
 	Button,
+	ButtonGroup,
 	FormControl,
 	FormLabel,
-	Select,
+	Tooltip,
 	InputGroup,
 	InputRightAddon,
 	NumberInput,
@@ -14,9 +15,10 @@ import {
 	NumberInputStepper,
 	UseCounterProps as ChakraUseCounterProps,
 } from '@chakra-ui/react';
+import { GoCheck } from 'react-icons/go';
 
 import { useControl } from '@/contexts/play';
-import type { ConfigType } from '@/types/index';
+import { defaultSettings } from '@/utils/index';
 
 export default function Controls() {
 	const { controlState, dispatchControl, changeControlWithServer } = useControl();
@@ -25,6 +27,7 @@ export default function Controls() {
 		<Box>
 			<NumberField
 				label="Height"
+				info="number of pixels to consider in the height of the image"
 				val={controlState.height}
 				onChange={(curVal) =>
 					changeControlWithServer({
@@ -39,6 +42,7 @@ export default function Controls() {
 			/>
 			<NumberField
 				label="Width"
+				info="number of pixels to consider in the width of the image"
 				val={controlState.width}
 				onChange={(curVal) =>
 					changeControlWithServer({
@@ -53,6 +57,7 @@ export default function Controls() {
 			/>
 			<NumberField
 				label="Blur"
+				info="the amount by which the image will be blurred"
 				val={controlState.blur}
 				onChange={(curVal) =>
 					dispatchControl({
@@ -60,13 +65,14 @@ export default function Controls() {
 						payload: { blur: parseFloat(curVal) },
 					})
 				}
-				rightSideDisplay={'px'}
+				rightSideDisplay="px"
 				max={30.0}
 				min={0.0}
 				step={0.5}
 			/>
 			<NumberField
 				label="Scale"
+				info="the magnification factor of the image"
 				val={controlState.scale}
 				onChange={(curVal) =>
 					dispatchControl({
@@ -78,14 +84,15 @@ export default function Controls() {
 				min={0.0}
 				step={0.05}
 			/>
-			<DropdownSelect // change this to a double button like toggle - selected one is filled (buttongroup)
-				label="Format"
-				options={[]}
+			<ToggleButtons
+				label="Config"
+				info="config for css-styles or base64-image"
+				options={defaultSettings.PLAY_CONFIGS}
 				val={controlState.config}
-				onChange={(e) =>
-					dispatchControl({
+				onClick={(e) =>
+					changeControlWithServer({
 						type: 'CHANGE_CONFIG',
-						payload: { config: e.target.value as ConfigType },
+						payload: { config: (e.target as any).value },
 					})
 				}
 			/>
@@ -108,13 +115,14 @@ function NumberField({
 	max,
 	onChange,
 	rightSideDisplay,
+	info,
 }: INumberFieldProps) {
 	return (
 		<Box my="1.5">
 			<FormControl id={label}>
-				<FormLabel>
-					<strong>{label}</strong>
-				</FormLabel>
+				<Tooltip hasArrow label={info} placement="top">
+					<FormLabel fontWeight="extrabold">{label}</FormLabel>
+				</Tooltip>
 				<InputGroup>
 					<NumberInput
 						max={max}
@@ -136,30 +144,48 @@ function NumberField({
 	);
 }
 
-function DropdownSelect({ options, label, val, onChange }: IDropdownSelectProps) {
+function ToggleButtons({ label, options, val, info, onClick }: IToggleButtonProps) {
+	const isFirstActive = options[0] === val;
+	const isSecondActive = options[1] === val;
+
+	const variant1 = isFirstActive ? 'solid' : 'outline';
+	const variant2 = isSecondActive ? 'solid' : 'outline';
+
+	const leftIcon = isFirstActive ? <GoCheck /> : undefined;
+	const rightIcon = isSecondActive ? <GoCheck /> : undefined;
+
 	return (
-		<Box my="2.5">
-			<FormControl id={label}>
-				<FormLabel>
-					<strong>{label}</strong>
-				</FormLabel>
-				<Select onChange={onChange} value={val}>
-					<option
-						value={`Select a ${label}`}
-						disabled={true}>{`Select a ${label}`}</option>
-					{options.map((opt) => (
-						<option value={opt} key={opt}>
-							{opt}
-						</option>
-					))}
-				</Select>
-			</FormControl>
-		</Box>
+		<FormControl id={label}>
+			<Tooltip hasArrow label={info} placement="top">
+				<FormLabel fontWeight="extrabold">Config</FormLabel>
+			</Tooltip>
+			<InputGroup>
+				<ButtonGroup size="sm" isAttached>
+					<Button
+						value={options[0]}
+						onClick={onClick}
+						variant={variant1}
+						disabled={isFirstActive}
+						leftIcon={leftIcon}>
+						CSS
+					</Button>
+					<Button
+						onClick={onClick}
+						value={options[1]}
+						variant={variant2}
+						disabled={isSecondActive}
+						rightIcon={rightIcon}>
+						Base64
+					</Button>
+				</ButtonGroup>
+			</InputGroup>
+		</FormControl>
 	);
 }
 
 interface INumberFieldProps {
 	label: string;
+	info: string;
 	max: number;
 	min: number;
 	val: number;
@@ -168,9 +194,10 @@ interface INumberFieldProps {
 	rightSideDisplay?: ReactNode;
 }
 
-interface IDropdownSelectProps {
-	options: string[];
+interface IToggleButtonProps {
 	label: string;
-	onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-	val: string;
+	info: string;
+	options: string[];
+	val: number | string;
+	onClick: (e: MouseEvent) => void;
 }
