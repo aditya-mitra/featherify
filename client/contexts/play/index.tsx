@@ -1,9 +1,17 @@
-import { useReducer, createContext, useContext, Dispatch, ReactNode, useCallback } from 'react';
+import {
+	useReducer,
+	createContext,
+	useContext,
+	Dispatch,
+	ReactNode,
+	useCallback,
+	useRef,
+} from 'react';
 
 import { reducer, IAction, IActionPayload } from './reducer';
 import type { PlayType, ServerActionType } from '@/types/index';
-import useDebouncedCallback from '@/hooks/useDebouncedCallback';
 import { getSingleFeather } from '@/lib/apiCalls';
+import useDebouncedEffect from '@/hooks/useDebounceEffect';
 
 const ControlContext = createContext<IControlContext>({
 	controlState: {} as any,
@@ -14,33 +22,39 @@ const ControlContext = createContext<IControlContext>({
 export function PlayControlProvider({ providerValue, children }: IControlProviderProps) {
 	const [controlState, dispatchControl] = useReducer(reducer, providerValue);
 
-	// TODO: the controlState contains the previous value and not the updated one
-	const changeControlOnServerResponse = useDebouncedCallback(
-		() => {
-			getSingleFeather(
-				controlState.file ?? controlState.imgSrc,
-				controlState.height,
-				controlState.width,
-				controlState.config
-			).then(({ feathers, success }) => {
-				if (success && feathers) {
-					dispatchControl({
-						type: 'NEW_CODE',
-						payload: { code: feathers[0].styles ?? feathers[0].base64 },
-					});
-				}
-			});
-		},
-		[dispatchControl, controlState],
-		250
-	);
+	const serverChange = useRef<boolean>(false);
 
 	const changeControlWithServer: IChangeControlWithServer = useCallback(
 		(control) => {
 			dispatchControl(control);
-			changeControlOnServerResponse();
+			serverChange.current = true;
 		},
-		[dispatchControl, changeControlOnServerResponse]
+		[dispatchControl]
+	);
+
+	useDebouncedEffect(
+		() => {
+			// do not call to server on component mount
+			if (serverChange.current) {
+				serverChange.current = false;
+
+				getSingleFeather(
+					controlState.file ?? controlState.imgSrc,
+					controlState.height,
+					controlState.width,
+					controlState.config
+				).then(({ feathers, success }) => {
+					if (success && feathers) {
+						dispatchControl({
+							type: 'NEW_CODE',
+							payload: { code: feathers[0].styles ?? feathers[0].base64 },
+						});
+					}
+				});
+			}
+		},
+		[dispatchControl, controlState],
+		250
 	);
 
 	return (
