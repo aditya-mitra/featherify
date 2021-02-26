@@ -1,10 +1,10 @@
-import type { FormatType } from '@/types/index';
+import type { ConfigType } from '@/types/index';
 
 export const playSettings = {
 	blur: 18.5,
 	height: 10,
 	width: 10,
-	format: 'css' as FormatType,
+	config: 'css' as ConfigType,
 	scale: 1,
 	uuid: '',
 	code: {},

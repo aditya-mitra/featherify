@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode } from 'react';
+import { ChangeEvent, ReactNode, useCallback } from 'react';
 import {
 	Box,
 	Button,
@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 
 import { useControl } from '@/contexts/play';
-import type { FormatType } from '@/types/index';
+import type { ConfigType } from '@/types/index';
 
 export default function Controls() {
 	const { controlState, dispatchControl } = useControl();
@@ -81,11 +81,11 @@ export default function Controls() {
 			<DropdownSelect // change this to a double button like toggle - selected one is filled (buttongroup)
 				label="Format"
 				options={[]}
-				val={controlState.format}
+				val={controlState.config}
 				onChange={(e) =>
 					dispatchControl({
-						type: 'CHANGE_FORMAT',
-						payload: { format: e.target.value as FormatType },
+						type: 'CHANGE_CONFIG',
+						payload: { config: e.target.value as ConfigType },
 					})
 				}
 			/>
@@ -175,4 +175,4 @@ interface IDropdownSelectProps {
 	val: string;
 }
 
-type serverControl = 'HEIGHT' | 'WIDTH' | 'CONFIG';
+type serverControlType = 'HEIGHT' | 'WIDTH' | 'CONFIG';

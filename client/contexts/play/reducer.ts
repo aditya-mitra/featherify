@@ -1,4 +1,4 @@
-import type { PlayType } from '@/types/index';
+import type { PlayType, ActionType } from '@/types/index';
 import { defaultSettings } from '@/utils/index';
 
 const initialValue: Required<IActionPayload> = defaultSettings.playSettings;
@@ -9,7 +9,7 @@ export function reducer(state: PlayType, action: IAction): PlayType {
 		width,
 		scale,
 		blur,
-		format,
+		config,
 		code,
 		uuid,
 	} = action.payload as Required<IActionPayload>;
@@ -24,8 +24,8 @@ export function reducer(state: PlayType, action: IAction): PlayType {
 			return { ...state, scale };
 		case 'CHANGE_BLUR':
 			return { ...state, blur };
-		case 'CHANGE_FORMAT':
-			return { ...state, format };
+		case 'CHANGE_CONFIG':
+			return { ...state, config };
 		case 'NEW_IMAGE_STYLES':
 			return { ...state, code, uuid };
 		case 'RESET':
@@ -34,15 +34,6 @@ export function reducer(state: PlayType, action: IAction): PlayType {
 			return state;
 	}
 }
-
-type ActionType =
-	| 'CHANGE_HEIGHT'
-	| 'CHANGE_WIDTH'
-	| 'CHANGE_BLUR'
-	| 'CHANGE_SCALE'
-	| 'CHANGE_FORMAT'
-	| 'NEW_IMAGE_STYLES'
-	| 'RESET';
 
 // restricting payload to not change certain keys
 type IActionPayload = Omit<Partial<PlayType>, 'imgSrc' | 'name' | 'file'>;

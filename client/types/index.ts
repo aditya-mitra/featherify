@@ -14,8 +14,7 @@ export type GeneratedType = {
 	base64?: string;
 };
 
-// TODO: just target these 2 formats for now until FULL completion
-export type FormatType = 'css' | 'base64';
+export type ConfigType = 'css' | 'base64';
 
 export type PlayType = {
 	name: string;
@@ -26,7 +25,7 @@ export type PlayType = {
 	height: number;
 	blur: number;
 	scale: number;
-	format: FormatType;
+	config: ConfigType;
 	code: object;
 };
 
@@ -35,3 +34,14 @@ export type ErrorDisplayType = {
 	description: string;
 	duration?: number;
 };
+
+export type ActionType =
+	| 'CHANGE_HEIGHT'
+	| 'CHANGE_WIDTH'
+	| 'CHANGE_BLUR'
+	| 'CHANGE_SCALE'
+	| 'CHANGE_CONFIG'
+	| 'NEW_IMAGE_STYLES'
+	| 'RESET';
+
+export type ServerActionType = Pick<ActionType, 'CHANGE_CONFIG' | 'CHANGE_HEIGHT' | 'CHANGE_WIDTH'>;
