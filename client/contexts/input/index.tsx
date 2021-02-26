@@ -11,7 +11,7 @@ import {
 
 import { usePlays } from '@/contexts/playground';
 import { getFileDatas } from '@/lib/filesHandler';
-import { getFeathersFromFiles, getFeathersFromURLs } from '@/lib/apiCalls';
+import { getMultipleFeathers } from '@/lib/apiCalls';
 import type { FileInfoType, GeneratedType } from '@/types/index';
 
 const InputContext = createContext<IInputContext>({
@@ -58,18 +58,18 @@ export function InputProvider({ children }: IInputProviderProps) {
 	);
 
 	const handleSubmit = useCallback(async () => {
-		await getFeathersFromFiles(fileInfos).then(({ feathers, success }) => {
+		await getMultipleFeathers(fileInfos).then(({ feathers, success }) => {
 			if (success) {
 				addPlays(fileInfos, feathers as GeneratedType[]);
 				setFileInfos([]);
 			}
 			setLoading(false);
 		});
-	}, [addPlays, fileInfos, setFileInfos, setLoading, getFeathersFromFiles]);
+	}, [addPlays, fileInfos, setFileInfos, setLoading, getMultipleFeathers]);
 
 	const submitURLs = useCallback(
 		async (urls: string[]) => {
-			await getFeathersFromURLs(urls).then(({ success, feathers }) => {
+			await getMultipleFeathers(urls).then(({ success, feathers }) => {
 				if (success) {
 					addPlays(urls, feathers as GeneratedType[]);
 					setUrlsCount(1);
@@ -77,7 +77,7 @@ export function InputProvider({ children }: IInputProviderProps) {
 				setLoading(false);
 			});
 		},
-		[urlsCount, setUrlsCount]
+		[urlsCount, setUrlsCount, getMultipleFeathers]
 	);
 
 	const fileControl = useMemo(

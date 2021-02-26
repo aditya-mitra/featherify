@@ -18,8 +18,6 @@ import {
 import { useControl } from '@/contexts/play';
 import type { FormatType } from '@/types/index';
 
-const FormatOptions: FormatType[] = ['css', 'base64'];
-
 export default function Controls() {
 	const { controlState, dispatchControl } = useControl();
 
@@ -82,7 +80,7 @@ export default function Controls() {
 			/>
 			<DropdownSelect // change this to a double button like toggle - selected one is filled (buttongroup)
 				label="Format"
-				options={FormatOptions}
+				options={[]}
 				val={controlState.format}
 				onChange={(e) =>
 					dispatchControl({
@@ -176,3 +174,5 @@ interface IDropdownSelectProps {
 	onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 	val: string;
 }
+
+type serverControl = 'HEIGHT' | 'WIDTH' | 'CONFIG';

@@ -2,9 +2,6 @@ import { useReducer, createContext, useContext, Dispatch, ReactNode } from 'reac
 
 import { reducer, IAction } from './reducer';
 import { PlayType } from '@/types/index';
-import useDebouncedEffect from '@/hooks/useDebounceEffect';
-import { generateValidFileInfo } from '@/lib/filesHandler';
-import { getSingleFeatherFromFile } from '@/lib/apiCalls';
 
 const ControlContext = createContext<IControlContext>({
 	controlState: {} as any,
@@ -14,24 +11,24 @@ const ControlContext = createContext<IControlContext>({
 export function PlayControlProvider({ providerValue, children }: IControlProviderProps) {
 	const [controlState, dispatchControl] = useReducer(reducer, providerValue);
 
-	useDebouncedEffect(
-		() => {
-			const fileInfo = generateValidFileInfo(controlState.name, controlState.file as File);
+	// useDebouncedEffect(
+	// 	() => {
+	// 		const fileInfo = generateValidFileInfo(controlState.name, controlState.file as File);
 
-			getSingleFeatherFromFile(fileInfo, controlState.height, controlState.width).then(
-				({ success, feathers }) => {
-					if (success && Array.isArray(feathers)) {
-						dispatchControl({
-							type: 'NEW_IMAGE_STYLES',
-							payload: { uuid: feathers[0].uuid, code: feathers[0].styles },
-						});
-					}
-				}
-			);
-		},
-		[controlState.height, controlState.width],
-		500
-	);
+	// 		getSingleFeatherFromFile(fileInfo, controlState.height, controlState.width).then(
+	// 			({ success, feathers }) => {
+	// 				if (success && Array.isArray(feathers)) {
+	// 					dispatchControl({
+	// 						type: 'NEW_IMAGE_STYLES',
+	// 						payload: { uuid: feathers[0].uuid, code: feathers[0].styles },
+	// 					});
+	// 				}
+	// 			}
+	// 		);
+	// 	},
+	// 	[controlState.height, controlState.width],
+	// 	500
+	// );
 
 	return (
 		<ControlContext.Provider value={{ controlState, dispatchControl }}>

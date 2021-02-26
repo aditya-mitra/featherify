@@ -8,10 +8,6 @@ export async function getFeathersFromURLs(urls: string[]): Promise<IResponse> {
 		data: formdata,
 	})
 		.then((response) => response.data)
-		.then((data) => {
-			console.log(data, 'from api');
-			return data;
-		})
 		.then((data) => ({ success: true, feathers: data }))
 		.catch((error) => createError(error));
 }

@@ -7,3 +7,12 @@ export function createArrayWithRefsHavingValue(inputs: HTMLInputElement[]): stri
 	}
 	return strs;
 }
+
+export function isArrayOfStrings(datas: Array<any>): boolean {
+	for (const data of datas) {
+		if (typeof data !== 'string') {
+			return false;
+		}
+	}
+	return true;
+}

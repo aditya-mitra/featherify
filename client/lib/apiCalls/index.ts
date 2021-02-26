@@ -1,2 +1,2 @@
-export { getFeathersFromFiles, getSingleFeatherFromFile } from './withFiles';
-export { getFeathersFromURLs } from './withUrls';
+export { default as getMultipleFeathers } from './getMultiple';
+export { default as getSingleFeather } from './getSingle';
