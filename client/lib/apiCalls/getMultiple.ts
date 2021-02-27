@@ -2,7 +2,9 @@ import { createError, featherCall, IResponse } from './axios';
 import { generateFormDataForFiles, generateFormDataForURLs, isArrayOfStrings } from '@/utils/index';
 import type { FileInfoType } from '@/types/index';
 
-export default async function getMultipleFeathers(datas: FileInfoType[] | string[]): Promise<IResponse> {
+export default async function getMultipleFeathers(
+	datas: FileInfoType[] | string[]
+): Promise<IResponse> {
 	if (isArrayOfStrings(datas)) {
 		return getFeathersFromURLs(datas as string[]);
 	} else {

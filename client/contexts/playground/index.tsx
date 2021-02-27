@@ -1,9 +1,6 @@
 import { createContext, ReactNode, useState, useContext } from 'react';
 
-import {
-	removeAPlayItem,
-	normalizeOutputsWithInputs as normalize,
-} from '@/utils/index';
+import { removeAPlayItem, normalizeOutputsWithInputs as normalize } from '@/utils/index';
 import type { FileInfoType, GeneratedType, PlayType } from '@/types/index';
 
 const PlayGroundChamberContext = createContext<IPlayGroundChamberContext>({
@@ -36,7 +33,7 @@ export function usePlays() {
 	return useContext(PlayGroundChamberContext);
 }
 
-type addPlaysType = (ins: FileInfoType[]|string[], outs: GeneratedType[]) => void;
+type addPlaysType = (ins: FileInfoType[] | string[], outs: GeneratedType[]) => void;
 
 interface IPlayGroundChamberProviderProps {
 	children: ReactNode;
