@@ -27,7 +27,7 @@ export default function CallToActionWithIllustration() {
 					lightweight <Icon as={GiFeather} /> substitute for your high quality Image.
 				</Text>
 				<Stack spacing={6} direction="row">
-					<Button rounded={'full'} px={6} bg="red.600" _hover={{ bg: 'orange.500' }}>
+					<Button rounded="full" px={6} bg="red.600" _hover={{ bg: 'red.400' }}>
 						PlayGround
 					</Button>
 					<Button rounded="full" px={6}>
