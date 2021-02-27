@@ -7,10 +7,9 @@ from .serializers import ManipulatorSerializer
 
 
 class ManipulatorView(APIView):
-
     def get(self, request):
-        custom_data = {"company": "mahindra", "car": "scorpio"}
-        return Response(data=custom_data)
+        api_info_data = {"status": "online"}
+        return Response(data=api_info_data)
 
     def post(self, request, format=None):
 
