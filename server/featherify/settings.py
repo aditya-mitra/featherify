@@ -6,9 +6,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "k^=9w^ho#qon6@#-sj0dtvs8cz-a^g0_=yf$(2c4afi)2z53ax"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = getenv('DEBUG','TRUE')=='TRUE'
+DEBUG = getenv("DEBUG", "TRUE") == "TRUE"
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "dtam87cvk4.execute-api.us-east-2.amazonaws.com",
+]
 
 INSTALLED_APPS = [
     "django.contrib.auth",

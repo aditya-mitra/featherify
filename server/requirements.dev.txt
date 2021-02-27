@@ -4,5 +4,6 @@ Pillow>=8.1.0,<8.2.0
 requests>=2.25.0,<2.26.0 # this already comes with django or drj
 django-cors-headers>=3.7.0,<3.8.0
 
-black
-mypy
+zappa>=0.52.0,<0.53.0 # for deployment into aws lamda
+black # for pretty formatting
+mypy # for static type checking

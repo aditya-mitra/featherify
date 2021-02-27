@@ -1,11 +1,20 @@
-# TODO
+# Quickstart
 
----
+The following commands will help you quickstart the server on `http://localhost:8000/api/manipulate`
 
-- Generate API Documentation using Inbuilt Rest Framework Swagger UI generator
+```shell
+# MAKE SURE YOU ARE RUNNING THESE COMMANDS IN THE server FOLDER 
 
-https://www.django-rest-framework.org/coreapi/from-documenting-your-api/
+# create a virtual environment
+python3 -m venv ./venv
+# activate the virtual environment
+source venv/bin/activate
+# install the dev requirements
+pip install -r requirements.dev.txt
+# start the django server
+python manage.py runserver
+```
 
-https://www.youtube.com/watch?v=xlcYLlndqz4
+## For Deploying into AWS Lambda
 
----
+[Used zappa for deploying django app into serverless AWS Lambda](https://www.agiliq.com/blog/2019/01/complete-serverless-django/)
