@@ -14,15 +14,24 @@ export const featherCall = axios.create({
 });
 
 export function createError(error: AxiosError) {
-	const errorAsString = error.response?.data?.detail || error.message || JSON.stringify(error);
+	let errorName: string = '';
+	let errorDetail: string = '';
+
+	if (Object.keys(error.response?.data).length > 0) {
+		errorName = Object.keys(error.response?.data)[0];
+		errorDetail = JSON.stringify(Object.values(error.response?.data)[0]);
+	}else{
+		errorName = error.name || 'Problem when during request'
+		errorDetail = error.message || JSON.stringify(error);
+	}
 	createErrorToasts([
 		{
-			title: error.name || 'Problem when during request',
-			description: errorAsString,
+			title: errorName,
+			description: errorDetail,
 			duration: 3000,
 		},
 	]);
-	return { success: false, error: errorAsString };
+	return { success: false, error: errorDetail };
 }
 export interface IResponse {
 	success: boolean;
