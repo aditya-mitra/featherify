@@ -20,8 +20,12 @@ export default function DropZone() {
 
 	return (
 		<Box my="8">
-			{/* TODO: add gradient to these headings */}
-			<Heading textAlign="center">File Feathers</Heading>
+			<Heading
+				textAlign="center"
+				bgGradient="linear(to-l, #333333,#dd1818)"
+				bgClip="text">
+				File Feathers
+			</Heading>
 			<DropZoneCatcher>
 				{fileInfos.length > 0 ? <DropZoneTable /> : <DropZoneInitialText />}
 			</DropZoneCatcher>
@@ -59,12 +63,18 @@ function DropZoneInitialText() {
 	const { handleAdd } = useInputFiles();
 	return (
 		<>
-			<Text fontSize="4xl" fontWeight="bold" color="facebook">
+			<Text
+				fontSize="4xl"
+				fontWeight="bold"
+				bgGradient="linear(to-l, #1a2a6c,#b21f1f,#fdbb2d)"
+				bgClip="text">
 				Drag and Drop Files Here
 			</Text>
 			<Button
 				d="block"
-				colorScheme="telegram"
+				colorScheme="orange"
+				color="white"
+				bgGradient="linear(to-l, #1a2a6c,#b21f1f,#fdbb2d)"
 				mt="2.5"
 				onClick={() => inputRef.current?.click()}>
 				Or Click to Upload Files

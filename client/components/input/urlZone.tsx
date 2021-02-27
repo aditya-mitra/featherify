@@ -49,12 +49,18 @@ export default function UrlZone() {
 	}
 
 	useEffect(() => {
-		urlRefs.current[urlsCount - 1].focus();
+		if (urlsCount > 1) { // to prevent focus on component mount
+			urlRefs.current[urlsCount - 1].focus();
+		}
 	}, [urlsCount]);
 
 	return (
 		<Box my="10" mx="4">
-			<Heading textAlign="center" my="4">
+			<Heading
+				textAlign="center"
+				my="4"
+				bgGradient="linear(to-l, #333333,#dd1818)"
+				bgClip="text">
 				URL Feathers
 			</Heading>
 			<Flex alignItems="center" flexDirection="column">
@@ -81,9 +87,11 @@ function SubmitButton({ handleOnClick, loading }: ISubmitButton) {
 	return (
 		<Button
 			d="block"
-			colorScheme="twitter"
+			colorScheme="orange"
+			color="white"
 			mt="2.5"
 			width="35%"
+			bgGradient="linear(to-l, #1a2a6c,#b21f1f,#fdbb2d)"
 			alignContent="center"
 			justifyContent="center"
 			isLoading={loading}

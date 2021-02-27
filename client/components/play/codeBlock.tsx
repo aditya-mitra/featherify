@@ -34,7 +34,7 @@ function CopyButton(props: ButtonProps) {
 			size="sm"
 			position="absolute"
 			textTransform="uppercase"
-			colorScheme="messenger"
+			colorScheme="orange"
 			fontSize="xs"
 			height="24px"
 			top="1.5"
