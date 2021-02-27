@@ -1,3 +1,4 @@
+from os import getenv
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -5,9 +6,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "k^=9w^ho#qon6@#-sj0dtvs8cz-a^g0_=yf$(2c4afi)2z53ax"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = getenv('DEBUG','TRUE')=='TRUE'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 INSTALLED_APPS = [
     "django.contrib.auth",
