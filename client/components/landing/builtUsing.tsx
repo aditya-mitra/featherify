@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 import { Heading, Stack, Box, Container, SimpleGrid, Text } from '@chakra-ui/react';
-import { SiDjango, SiNextDotJs, SiPython } from 'react-icons/si';
+import { SiHashnode, SiDjango, SiNextDotJs, SiPython, SiAmazonaws } from 'react-icons/si';
 
 export default function BuiltUsing() {
 	return (
-		<Container maxW="1280px" bg="teal.500" color="white" py="6.5rem">
+		<Container maxW="1280px" bg="red.600" color="white" py="6.5rem">
 			<Box maxW="760px" mx="auto" textAlign="center" mb="56px">
 				<HeadingText />
 			</Box>
@@ -13,15 +13,24 @@ export default function BuiltUsing() {
 					<SimpleGrid columns={{ base: 1, md: 2 }} spacingX="10" spacingY="14">
 						<Feature title="Django" icon={<SiDjango />}>
 							Django and Django Rest Framework together support the backend of
-							Featherify
+							Featherify.
+						</Feature>
+						<Feature title="AWS Amplify and Lamdba" icon={<SiAmazonaws />}>
+							AWS Amplify and AWS Lamdba support the entire cloud hosting of
+							Featherify.
+						</Feature>
+						<Feature title="Pillow" icon={<SiPython />}>
+							Pillow is the Python Image Processing Library that we are using to
+							generate these awesome image substitutes.
+						</Feature>
+						<Feature title="Hashnode" icon={<SiHashnode />}>
+							Without the hackathon on Hashnode, Featherify would not have been built.
+							The Blog Posts and the Documentation on Featherify are available on
+							Hashnode.
 						</Feature>
 						<Feature title="NextJS" icon={<SiNextDotJs />}>
 							NextJS is the React Framework we used for supporting our Playground and
 							this Website.
-						</Feature>
-						<Feature title="Pillow" icon={<SiPython />}>
-							Pillow is the Python Image Processing Library that we are using to
-							generate the awesome image placeholders.
 						</Feature>
 					</SimpleGrid>
 				</Box>

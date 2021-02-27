@@ -1,9 +1,5 @@
 import { Box, Flex, Link, Stack, Text } from '@chakra-ui/react';
 
-import { Logo } from './logo';
-
-// needs remodification - can use the footer on chakra-ui website
-
 export default function Footer() {
 	return (
 		<Box as="footer" role="contentinfo" py="6">
@@ -13,10 +9,21 @@ export default function Footer() {
 				mx="auto"
 				px={{ base: '6', md: '8' }}
 				align="center"
-				justify="center">
-				<a aria-current="page" aria-label="Back to Home page" href="/" rel="home">
-					<Logo h="6" iconColor="blue.600" />
-				</a>
+				justify="center"
+				position="relative">
+				<Stack
+					my={{ base: '6', md: 0 }}
+					direction={{ base: 'column', md: 'row' }}
+					fontSize="sm">
+					<Box
+						mt="-12"
+						backgroundImage={`url("/images/logo_no_bg.png")`}
+						backgroundSize="cover"
+						height="80px"
+						width="190px"
+						filter="scale(2)"
+					/>
+				</Stack>
 				<Stack
 					my={{ base: '6', md: 0 }}
 					direction={{ base: 'column', md: 'row' }}

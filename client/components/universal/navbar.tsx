@@ -30,9 +30,17 @@ export default function NavbarContent() {
 						href="/"
 						fontSize="2xl"
 						fontWeight="hairline"
-						_hover={{}}
-						fontFamily="monospace">
-						Featherify
+						fontFamily="monospace" position='relative'>
+						<Box
+							top='-65px'
+							left='-35px'
+							position='absolute'
+							backgroundImage={`url("/images/logo_no_bg.png")`}
+							backgroundSize="cover"
+							height="80px"
+							width="190px"
+							filter="scale(2)"
+						/>
 					</Link>
 				</Flex>
 
@@ -41,7 +49,7 @@ export default function NavbarContent() {
 						<NavButtons />
 					</HStack>
 					<Link
-						color="green"
+						color="red.500"
 						href="https://github.com/aditya-mitra"
 						isExternal
 						aria-label="GitHub Repository Link"
@@ -92,7 +100,7 @@ function ColorModeSwitch() {
 
 	return (
 		<Box aria-label={`Switch to ${text} Mode`}>
-			<Switch colorScheme="green" ml="10" isChecked={switchOn} onChange={toggleColorMode} />
+			<Switch colorScheme="whiteAlpha" ml="10" isChecked={switchOn} onChange={toggleColorMode} />
 			<Icon as={icon} ml="3" />
 		</Box>
 	);
@@ -101,13 +109,13 @@ function ColorModeSwitch() {
 function NavButtons() {
 	return (
 		<>
-			<Button colorScheme="green" variant="ghost">
+			<Button color="red" variant="ghost">
 				PlayGround
 			</Button>
-			<Button colorScheme="green" variant="ghost">
+			<Button color="red" variant="ghost">
 				Docs
 			</Button>
-			<Button colorScheme="green" variant="ghost">
+			<Button color="red" variant="ghost">
 				Examples
 			</Button>
 		</>
