@@ -30,11 +30,12 @@ export default function NavbarContent() {
 						href="/"
 						fontSize="2xl"
 						fontWeight="hairline"
-						fontFamily="monospace" position='relative'>
+						fontFamily="monospace"
+						position="relative">
 						<Box
-							top='-65px'
-							left='-35px'
-							position='absolute'
+							top="-62px"
+							left="-32px"
+							position="absolute"
 							backgroundImage={`url("/images/logo_no_bg.png")`}
 							backgroundSize="cover"
 							height="80px"
@@ -50,7 +51,7 @@ export default function NavbarContent() {
 					</HStack>
 					<Link
 						color="red.500"
-						href="https://github.com/aditya-mitra"
+						href="https://github.com/aditya-mitra/featherify"
 						isExternal
 						aria-label="GitHub Repository Link"
 						ml="3">
@@ -100,7 +101,12 @@ function ColorModeSwitch() {
 
 	return (
 		<Box aria-label={`Switch to ${text} Mode`}>
-			<Switch colorScheme="whiteAlpha" ml="10" isChecked={switchOn} onChange={toggleColorMode} />
+			<Switch
+				colorScheme="whiteAlpha"
+				ml="10"
+				isChecked={switchOn}
+				onChange={toggleColorMode}
+			/>
 			<Icon as={icon} ml="3" />
 		</Box>
 	);
@@ -109,15 +115,16 @@ function ColorModeSwitch() {
 function NavButtons() {
 	return (
 		<>
-			<Button color="red" variant="ghost">
-				PlayGround
-			</Button>
-			<Button color="red" variant="ghost">
-				Docs
-			</Button>
-			<Button color="red" variant="ghost">
-				Examples
-			</Button>
+			<a href="/play" tabIndex={-1}>
+				<Button color="red" variant="ghost">
+					PlayGround
+				</Button>
+			</a>
+			<a href="/demos" tabIndex={-1}>
+				<Button color="red" variant="ghost">
+					Demos
+				</Button>
+			</a>
 		</>
 	);
 }

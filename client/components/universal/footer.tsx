@@ -1,4 +1,5 @@
-import { Box, Flex, Link, Stack, Text } from '@chakra-ui/react';
+import { Box, Flex, Link, Stack, Text, Icon } from '@chakra-ui/react';
+import { GiFeatherWound } from 'react-icons/gi';
 
 export default function Footer() {
 	return (
@@ -31,8 +32,8 @@ export default function Footer() {
 					fontSize="sm"
 					spacing={{ base: '2', md: '8' }}
 					textAlign={{ base: 'center', md: 'start' }}>
-					<Text>
-						Built with ♥ by{' '}
+					<Text fontWeight="extrabold">
+						Built with <Icon as={GiFeatherWound} /> by{' '}
 						<Link isExternal href="https://aditya-mitra.github.io">
 							Aditya Mitra
 						</Link>

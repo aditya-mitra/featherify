@@ -1,5 +1,6 @@
 import { Container, Heading, Stack, Text, Button, Icon } from '@chakra-ui/react';
 import { GiFeather } from 'react-icons/gi';
+import { VscLinkExternal } from 'react-icons/vsc';
 
 export default function CallToActionWithIllustration() {
 	return (
@@ -27,12 +28,16 @@ export default function CallToActionWithIllustration() {
 					lightweight <Icon as={GiFeather} /> substitute for your high quality Image.
 				</Text>
 				<Stack spacing={6} direction="row">
-					<Button rounded="full" px={6} bg="red.600" _hover={{ bg: 'red.400' }}>
-						PlayGround
-					</Button>
-					<Button rounded="full" px={6}>
-						Documentation
-					</Button>
+					<a href="/play" tabIndex={-1}>
+						<Button rounded="full" px={6} bg="red.600" _hover={{ bg: 'red.400' }}>
+							PlayGround
+						</Button>
+					</a>
+					<a href="/" target="_blank" rel="noreferrer noopener" tabIndex={-1}>
+						<Button rounded="full" px={6} rightIcon={<VscLinkExternal />}>
+							Documentation
+						</Button>
+					</a>
 				</Stack>
 			</Stack>
 		</Container>
