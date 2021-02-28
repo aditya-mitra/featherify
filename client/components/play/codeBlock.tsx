@@ -6,13 +6,23 @@ import { defaultSettings, isBase64 } from '@/utils/index';
 
 export default function CodeBlock() {
 	const {
-		controlState: { code },
+		controlState: { code, blur, scale },
 	} = useControl();
 
-	const copyCode = useMemo(
-		() => (isBase64(code) ? code : JSON.stringify(code, null, 4).replace(/"([^"]+)":/g, '$1:')),
-		[code]
-	);
+	const copyCode = useMemo(() => {
+		if (isBase64(code)) {
+			return code;
+		}
+		const modifiedCode = {
+			backgroundRepeat: 'no-repeat',
+			filter: `blur(${blur}px)`,
+			transform: `scale(${scale})`,
+			height: defaultSettings.PLAY_IMAGE_STYLE_DIMENSION,
+			width: defaultSettings.PLAY_IMAGE_STYLE_DIMENSION,
+			...code,
+		};
+		return JSON.stringify(modifiedCode, null, 4).replace(/"([^"]+)":/g, '$1:');
+	}, [code, blur, scale]);
 
 	const { hasCopied, onCopy } = useClipboard(copyCode);
 
