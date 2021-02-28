@@ -45,3 +45,10 @@ export type ActionType =
 	| 'RESET';
 
 export type ServerActionType = 'CHANGE_CONFIG' | 'CHANGE_HEIGHT' | 'CHANGE_WIDTH';
+
+export type SuccessFeatherType = {
+	uuid: string;
+	name: string;
+	styles?: object;
+	base64?: string;
+};
