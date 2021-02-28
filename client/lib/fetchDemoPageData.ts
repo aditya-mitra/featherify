@@ -16,12 +16,17 @@ const urls = [
 // 	'https://images.unsplash.com/photo-1613574714687-c33b9e90200d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max',
 // ];
 
+const serverURL =
+	process.env.NODE_ENV === 'development'
+		? 'http://localhost:8000/api/manipulate'
+		: 'https://dtam87cvk4.execute-api.us-east-2.amazonaws.com/production/api/manipulate';
+
 export default async function fetchDemoPageData() {
 	const formData = generateFormData(urls, 15, 15, 'css');
 
 	return new Promise<SuccessFeatherType[]>((resolve, reject) => {
 		restler
-			.post('http://localhost:8000/api/manipulate', {
+			.post(serverURL, {
 				timeout: 2.5 * 60 * 1000,
 				multipart: true,
 				data: { ...formData },

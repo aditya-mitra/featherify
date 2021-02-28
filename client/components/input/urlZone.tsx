@@ -12,7 +12,7 @@ import { Box, Button, Flex, Heading, Input, Stack } from '@chakra-ui/react';
 import { useInputLoading, useInputUrls } from '@/contexts/input';
 import { createArrayWithRefsHavingValue } from '@/utils/index';
 
-const placeholderText = 'ex. https://source.unsplash.com/random (press enter to add more urls)';
+const placeholderText = 'ex. https://tinyurl.com/featherifyexample (press enter to add more urls)';
 
 export default function UrlZone() {
 	const { urlsCount, setUrlsCount, submitURLs } = useInputUrls();

@@ -7,3 +7,4 @@ django-cors-headers>=3.7.0,<3.8.0
 zappa>=0.52.0,<0.53.0 # for deployment into aws lamda
 black # for pretty formatting
 mypy # for static type checking
+pylint # for linting

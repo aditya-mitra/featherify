@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev --port=9000",
-		"build": "next build && next export -o build",
+		"build": "next build",
+		"production-build": "NODE_ENV=production next build && next export -o build",
 		"start": "next start --port=9000",
 		"format": "prettier --write .",
 		"lint": "eslint '**/*.{ts,tsx}'"

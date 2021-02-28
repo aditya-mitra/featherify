@@ -9,7 +9,6 @@
 			"@/utils/*": ["utils/*"],
 			"@/lib/*": ["lib/*"],
 			"@/types/*": ["types/*"],
-			"@/assets/*": ["assets/*"]
 		},
 		"allowJs": true,
 		"alwaysStrict": true,
