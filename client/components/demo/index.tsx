@@ -12,12 +12,12 @@ export default function Demo({ feather }: IDemoProps) {
 
 	const divStyles = !loaded &&
 		feather.styles && {
-			...feather.styles,
-			backgroundRepeat: 'no-repeat',
-			filter: 'blur(12px)',
-			width: '250px',
-			height: '250px',
-		};
+		...feather.styles,
+		backgroundRepeat: 'no-repeat',
+		filter: 'blur(12px)',
+		width: '250px',
+		height: '250px',
+	};
 
 	useEffect(() => {
 		// if image is already cached

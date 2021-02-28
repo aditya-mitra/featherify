@@ -18,7 +18,7 @@ export default function Footer() {
 					fontSize="sm">
 					<Box
 						mt="-12"
-						backgroundImage={`url("/images/logo_no_bg.png")`}
+						backgroundImage={'url("/images/logo_no_bg.png")'}
 						backgroundSize="cover"
 						height="80px"
 						width="190px"

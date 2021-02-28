@@ -9,8 +9,8 @@ export type FileInfoType = {
 export type GeneratedType = {
 	name?: string;
 	uuid?: string;
-	styles?: object;
-	error?: object;
+	styles?: Record<string, unknown>;
+	error?: Record<string, unknown>;
 	base64?: string;
 };
 
@@ -26,7 +26,7 @@ export type PlayType = {
 	blur: number;
 	scale: number;
 	config: ConfigType;
-	code: object | string;
+	code: Record<string, unknown> | string;
 };
 
 export type ErrorDisplayType = {
@@ -49,6 +49,6 @@ export type ServerActionType = 'CHANGE_CONFIG' | 'CHANGE_HEIGHT' | 'CHANGE_WIDTH
 export type SuccessFeatherType = {
 	uuid: string;
 	name: string;
-	styles?: object;
+	styles?: Record<string, unknown>;
 	base64?: string;
 };

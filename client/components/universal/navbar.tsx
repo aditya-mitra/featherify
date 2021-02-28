@@ -36,7 +36,7 @@ export default function NavbarContent() {
 							top="-62px"
 							left="-32px"
 							position="absolute"
-							backgroundImage={`url("/images/logo_no_bg.png")`}
+							backgroundImage={'url("/images/logo_no_bg.png")'}
 							backgroundSize="cover"
 							height="80px"
 							width="190px"

@@ -137,7 +137,7 @@ function NumberField({
 							<NumberDecrementStepper />
 						</NumberInputStepper>
 					</NumberInput>
-					{rightSideDisplay && <InputRightAddon children={rightSideDisplay} />}
+					{rightSideDisplay && <InputRightAddon>{rightSideDisplay}</InputRightAddon>}
 				</InputGroup>
 			</FormControl>
 		</Box>

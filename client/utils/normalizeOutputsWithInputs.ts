@@ -18,7 +18,7 @@ function normalizeURLs(inputs: string[], outputs: GeneratedType[]): INormalizeRe
 	const normalizedPlays: PlayType[] = [];
 	const errors: ErrorDisplayType[] = [];
 
-	let o: number = 0;
+	let o = 0;
 
 	for (const i in inputs) {
 		const input = inputs[i];
@@ -55,7 +55,7 @@ function normalizeFiles(inputs: FileInfoType[], outputs: GeneratedType[]): INorm
 	const normalizedPlays: PlayType[] = [];
 	const errors: ErrorDisplayType[] = [];
 
-	let o: number = 0;
+	let o = 0;
 
 	for (const i in inputs) {
 		const input = inputs[i];

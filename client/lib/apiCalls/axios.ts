@@ -16,8 +16,8 @@ export const featherCall = axios.create({
 });
 
 export function createError(error: AxiosError) {
-	let errorName: string = '';
-	let errorDetail: string = '';
+	let errorName = '';
+	let errorDetail = '';
 
 	if (error.response?.data && Object.keys(error.response?.data).length > 0) {
 		errorName = Object.keys(error.response?.data)[0];
