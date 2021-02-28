@@ -1,4 +1,5 @@
 import type { GetStaticProps } from 'next';
+import { Box, Flex } from '@chakra-ui/react';
 
 import Layout from '@/components/universal/layout';
 import fetchDemoPageData from '@/lib/fetchDemoPageData';
@@ -8,9 +9,17 @@ import type { SuccessFeatherType } from '@/types/index';
 export default function Demos(props: IProps) {
 	return (
 		<Layout>
-			{props.feathers.map((feather) => (
-				<Demo feather={feather} key={feather.uuid} />
-			))}
+			<Box mx="4" my="8">
+				{props.feathers.map((feather, i) => (
+					<Flex
+						key={feather.uuid}
+						flexDirection="column"
+						my="5"
+						alignItems={i % 2 === 0 ? 'flex-start' : 'flex-end'}>
+						<Demo feather={feather} />
+					</Flex>
+				))}
+			</Box>
 		</Layout>
 	);
 }
