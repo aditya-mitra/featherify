@@ -5,10 +5,11 @@ import type { ConfigType, GeneratedType, SuccessFeatherType } from '@/types/inde
 
 const urls = [
 	'https://featherify-demos.s3.us-east-2.amazonaws.com/colourful.jpg',
-	'https://featherify-demos.s3.us-east-2.amazonaws.com/city_buidings.jpg',
-	'https://featherify-demos.s3.us-east-2.amazonaws.com/mountains.jpg',
-	'https://featherify-demos.s3.us-east-2.amazonaws.com/orange_photo.jpg',
-	'https://featherify-demos.s3.us-east-2.amazonaws.com/snow_mountains.jpg',
+	'https://featherify-demos.s3.us-east-2.amazonaws.com/example_photo.jpg',
+	// 'https://featherify-demos.s3.us-east-2.amazonaws.com/city_buidings.jpg',
+	// 'https://featherify-demos.s3.us-east-2.amazonaws.com/mountains.jpg',
+	// 'https://featherify-demos.s3.us-east-2.amazonaws.com/orange_photo.jpg',
+	// 'https://featherify-demos.s3.us-east-2.amazonaws.com/snow_mountains.jpg',
 ];
 
 // const devUrls = [
