@@ -1,5 +1,12 @@
-import Home from '@/views/home';
+import Layout from '@/components/universal/layout';
+import BuiltUsing from '@/components/landing/builtUsing';
+import HeroText from '@/components/landing/heroText';
 
-export default function HomePage() {
-	return <Home />;
+export default function Home() {
+	return (
+		<Layout>
+			<HeroText />
+			<BuiltUsing />
+		</Layout>
+	);
 }
