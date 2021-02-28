@@ -1,8 +1,8 @@
-![Featherify Logo](./client/public/logo_original.png)
+![Featherify Logo](./client/public/images/logo_original_uncropped.png)
 
 Featherify is an extremely fast and highly customizable generator of your **high-quality image**. If you don't like to _compress_ or _minify_ your image in your apps, Featherify might just be thing you were looking for.
 
-![Working Demo](./client/public/working_demo)
+![Working Demo](./client/public/images/working_demo)
 
 Featherify offers two interfaces for you to generate a substitute for your image.
 
@@ -20,9 +20,9 @@ _(Hosted on AWS Lamda)_
 
 If you have [Python](https://www.python.org/) and [NodeJS](https://nodejs.org/en/) installed in your system, you are ready to featherify in you computer.
 
-To Setup the Python Server, please [click here]()
+To Setup the Python Server, please [click here](https://github.com/aditya-mitra/featherify/tree/main/server#quickstart)
 
-To Setup the NodeJS Client, please [click here]()
+To Setup the NodeJS Client, please [click here](https://github.com/aditya-mitra/featherify/tree/main/client#quickstart)
 
 ## 🤝&nbsp; Found a bug? Missing a specific feature?
 
@@ -32,4 +32,4 @@ I would love to work to extend featherify to the next limit. Please feel free to
 
 ## 📘&nbsp; License
 
-Featherify is released under the under terms of the [MIT License](LICENSE).
+Featherify is released under the terms of the [MIT License](LICENSE).

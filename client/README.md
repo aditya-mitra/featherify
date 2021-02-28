@@ -1,3 +1,18 @@
+# Quickstart
+
+The following commands will help you quickstart the client app on `http://localhost:9000/`
+
+```shell
+# MAKE SURE YOU ARE RUNNING THESE COMMANDS IN THE client FOLDER
+
+# install yarn
+npm install -g yarn
+# install the requirements
+yarn install
+# run the dev server
+yarn dev
+```
+
 ## Folder Structure
 
 -   **_`lib` _**
