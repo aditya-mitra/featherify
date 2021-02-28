@@ -11,13 +11,13 @@ const urls = [
 	'https://featherify-demos.s3.us-east-2.amazonaws.com/snow_mountains.jpg',
 ];
 
-const devUrls = [
-	'https://images.unsplash.com/photo-1612993184197-2580755af1c7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max',
-	'https://images.unsplash.com/photo-1613574714687-c33b9e90200d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max',
-];
+// const devUrls = [
+// 	'https://images.unsplash.com/photo-1612993184197-2580755af1c7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max',
+// 	'https://images.unsplash.com/photo-1613574714687-c33b9e90200d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max',
+// ];
 
 export default async function fetchDemoPageData() {
-	const formData = generateFormData(devUrls, 15, 15, 'css');
+	const formData = generateFormData(urls, 15, 15, 'css');
 
 	return new Promise<SuccessFeatherType[]>((resolve, reject) => {
 		restler
