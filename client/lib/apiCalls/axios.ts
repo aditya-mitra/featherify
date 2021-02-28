@@ -10,7 +10,7 @@ const BASEURL =
 
 export const featherCall = axios.create({
 	baseURL: BASEURL,
-	timeout: 4 * 1000,
+	timeout: 45 * 1000,
 	method: 'POST',
 	headers: { 'Content-Type': 'multipart/form-data' },
 });
