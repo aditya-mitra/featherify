@@ -4,12 +4,12 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 import theme from '@/lib/chakraTheme';
 
-export default function Featherify({ Component }: AppProps) {
+export default function Featherify({ Component, pageProps }: AppProps) {
 	return (
 		<>
 			<HeadTags />
 			<ChakraProvider theme={theme}>
-				<Component />
+				<Component {...pageProps} />
 			</ChakraProvider>
 		</>
 	);
