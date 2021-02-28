@@ -13,7 +13,7 @@ const theme = extendTheme({
 			baseStyle: {
 				_focus: {
 					boxShadow: '0 0 0px 3px orange',
-					borderColor:'orange'
+					borderColor: 'orange',
 				},
 			},
 		},

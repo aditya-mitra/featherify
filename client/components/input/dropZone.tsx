@@ -20,10 +20,7 @@ export default function DropZone() {
 
 	return (
 		<Box my="8">
-			<Heading
-				textAlign="center"
-				bgGradient="linear(to-l, #333333,#dd1818)"
-				bgClip="text">
+			<Heading textAlign="center" bgGradient="linear(to-l, #333333,#dd1818)" bgClip="text">
 				File Feathers
 			</Heading>
 			<DropZoneCatcher>

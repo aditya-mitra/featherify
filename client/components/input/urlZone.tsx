@@ -49,7 +49,8 @@ export default function UrlZone() {
 	}
 
 	useEffect(() => {
-		if (urlsCount > 1) { // to prevent focus on component mount
+		if (urlsCount > 1) {
+			// to prevent focus on component mount
 			urlRefs.current[urlsCount - 1].focus();
 		}
 	}, [urlsCount]);
