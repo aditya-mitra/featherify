@@ -15,7 +15,7 @@ function PlayWithOutput({ providerValue, uniqueId }: IPlayControlProps) {
 			h="fit-inside"
 			borderWidth="1px"
 			borderRadius="lg"
-			mx="4"
+			m="4"
 			pos="relative"
 			d="flex"
 			alignItems="center"

@@ -64,6 +64,7 @@ export function InputProvider({ children }: IInputProviderProps) {
 				setFileInfos([]);
 			}
 			setLoading(false);
+			window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 		});
 	}, [addPlays, fileInfos, setFileInfos, setLoading, getMultipleFeathers]);
 
@@ -75,6 +76,7 @@ export function InputProvider({ children }: IInputProviderProps) {
 					setUrlsCount(1);
 				}
 				setLoading(false);
+				window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 			});
 		},
 		[urlsCount, setUrlsCount, getMultipleFeathers]
