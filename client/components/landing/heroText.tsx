@@ -33,7 +33,7 @@ export default function CallToActionWithIllustration() {
 							PlayGround
 						</Button>
 					</a>
-					<a href="/" target="_blank" rel="noreferrer noopener" tabIndex={-1}>
+					<a href="https://adityamitra.hashnode.dev/featherify-api-documentation" target="_blank" rel="noreferrer noopener" tabIndex={-1}>
 						<Button rounded="full" px={6} rightIcon={<VscLinkExternal />}>
 							Documentation
 						</Button>
