@@ -12,7 +12,7 @@ Check it out here -> _(Hosted on AWS Amplify)_
 
 - The API which you can use to convert your images during your _build time_ of your application.
 
-Check it out the Documentation Here ->
+Check it out the Documentation Here -> [https://adityamitra.hashnode.dev/featherify-api-documentation](https://adityamitra.hashnode.dev/featherify-api-documentation)
 
 _(Hosted on AWS Lamda)_
 
