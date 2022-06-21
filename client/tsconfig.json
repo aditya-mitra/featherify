@@ -8,7 +8,7 @@
 			"@/hooks/*": ["hooks/*"],
 			"@/utils/*": ["utils/*"],
 			"@/lib/*": ["lib/*"],
-			"@/types/*": ["types/*"],
+			"@/types/*": ["types/*"]
 		},
 		"allowJs": true,
 		"alwaysStrict": true,

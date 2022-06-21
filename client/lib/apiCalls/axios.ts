@@ -6,7 +6,7 @@ import type { GeneratedType } from '@/types/index';
 const BASEURL =
 	process.env.NODE_ENV === 'development'
 		? 'http://localhost:8000/api/manipulate'
-		: 'https://dtam87cvk4.execute-api.us-east-2.amazonaws.com/production/api/manipulate';
+		: 'https://splashy-righteous-aardvark.glitch.me/api/manipulate';
 
 export const featherCall = axios.create({
 	baseURL: BASEURL,

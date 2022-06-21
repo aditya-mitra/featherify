@@ -16,11 +16,16 @@ import {
 import { SiGithub } from 'react-icons/si';
 import { FiMoon, FiSun } from 'react-icons/fi';
 import { AiOutlineMenu } from 'react-icons/ai';
+import { useEffect } from 'react';
+import { wakeUp } from '@/lib/apiCalls';
 
 export default function NavbarContent() {
 	const bg = useColorModeValue('white', 'gray.800');
 
 	const mobileNav = useDisclosure();
+	useEffect(() => {
+		wakeUp();
+	}, []);
 
 	return (
 		<>
