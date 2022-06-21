@@ -134,6 +134,12 @@ function NavButtons() {
 				</StatHelpText>
 			</Stat>
 
+			<Link
+				href="https://adityamitra.hashnode.dev/featherify-the-image-substitute-generator"
+				isExternal>
+				Original Blog
+			</Link>
+
 			<a href="/play" tabIndex={-1}>
 				<Button color="red" variant="ghost">
 					PlayGround
