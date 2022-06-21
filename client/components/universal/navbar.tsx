@@ -139,11 +139,6 @@ function NavButtons() {
 					PlayGround
 				</Button>
 			</a>
-			<a href="/demos" tabIndex={-1}>
-				<Button color="red" variant="ghost">
-					Demos
-				</Button>
-			</a>
 		</>
 	);
 }
