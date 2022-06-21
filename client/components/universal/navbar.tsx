@@ -12,20 +12,20 @@ import {
 	useColorModeValue,
 	useColorMode,
 	useDisclosure,
+	Stat,
+	StatHelpText,
+	StatArrow,
+	StatLabel,
 } from '@chakra-ui/react';
 import { SiGithub } from 'react-icons/si';
 import { FiMoon, FiSun } from 'react-icons/fi';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { wakeUp } from '@/lib/apiCalls';
 
 export default function NavbarContent() {
 	const bg = useColorModeValue('white', 'gray.800');
-
 	const mobileNav = useDisclosure();
-	useEffect(() => {
-		wakeUp();
-	}, []);
 
 	return (
 		<>
@@ -118,8 +118,22 @@ function ColorModeSwitch() {
 }
 
 function NavButtons() {
+	const [isOnline, setIsOnline] = useState<boolean>(false);
+
+	useEffect(() => {
+		wakeUp().then((val) => setIsOnline(val));
+	}, [setIsOnline]);
+
 	return (
 		<>
+			<Stat>
+				<StatLabel>Server Status</StatLabel>
+				<StatHelpText>
+					<StatArrow type={isOnline ? 'increase' : 'decrease'} />
+					{isOnline ? 'Online' : 'Waking Up'}
+				</StatHelpText>
+			</Stat>
+
 			<a href="/play" tabIndex={-1}>
 				<Button color="red" variant="ghost">
 					PlayGround
